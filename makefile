@@ -1,2 +1,2 @@
-spellmake: main.c
+spellmake: spell.c
 	gcc -o spellmake spell.c -I.
