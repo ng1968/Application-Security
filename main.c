@@ -2,15 +2,16 @@
 #include <string.h>
 #include <stdlib.h>
 #include "dictionary.h"
- 
-#define DICTIONARY "wordlist.txt"
 
-int main()
-{  
+int main(int argc, char **argv)
+{ 
+  char* file_to_test = argv[1];
+  char* dictionary_file = argv[2];
+
   hashmap_t hashtable[HASH_SIZE];
   char* misspelled[MAX_MISSPELLED];
 
-  load_dictionary(DICTIONARY, hashtable);
+  load_dictionary(dictionary_file, hashtable);
   printf("load_dictionary complete\n");
   
   const char* correct_word = "inappropriateness's";
@@ -21,7 +22,7 @@ int main()
   	printf("\n%s was correctly spelled.\n", correct_word);
   }
 
-  FILE *fp = fopen("test1.txt", "r");
+  FILE *fp = fopen(file_to_test, "r");
   printf("Opended file\n");
   int misspelled_num = check_words(fp, hashtable, misspelled);
   printf("checked words\n");
