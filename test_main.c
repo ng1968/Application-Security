@@ -12,6 +12,8 @@ START_TEST(test_dictionary_normal)
     // Here we can test if certain words ended up in certain buckets
     // to ensure that our load_dictionary works as intended. I leave
     // this as an exercise.
+    const char* expected = "inappropriateness's";
+    ck_assert(strncmp(hashtable[1]->word, expected) == 0);
 }
 END_TEST
 
@@ -24,6 +26,8 @@ START_TEST(test_check_word_normal)
     ck_assert(check_word(correct_word, hashtable));
     ck_assert(!check_word(punctuation_word_2, hashtable));
     // Test here: What if a word begins and ends with "?
+    const char* question_mark_word = "?Test";
+    ck_assert(check_word(question_mark_word, hashtable));
 }
 END_TEST
 
