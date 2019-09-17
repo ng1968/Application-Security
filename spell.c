@@ -31,7 +31,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
   char line[1024];
   while(fgets(line,sizeof line, fp)){
     line[strlen(line)-1]='\0';
-    printf("%s\n", line);
 
     // Read the line.
     // Split the line on spaces and punctuation.
@@ -44,19 +43,17 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
     // For each word in line:
     while( words[i] != NULL )
     {
-      printf("%s\n", words[i]);
       // If not check_word(word):
       if( check_word(words[i], hashtable) == false )
       {
         char* misspelled_word = malloc(LENGTH);
-        strcpy(misspelled_word, words[i]);
+        if( strlcpy(misspelled_word, words[i], LENGTH) >= LENGTH ){
+          return -1;
+        }
         // Append word to misspelled.
         misspelled[num_misspelled] = misspelled_word;
         // Increment num_misspelled.
         num_misspelled++;
-        //for(int i = 0; i < num_misspelled; i++){
-          //printf("number: %d word %s\n", i, misspelled[i]);
-        //}
       }
       i++;
       words[i] = strtok(NULL, delim);
@@ -87,29 +84,11 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
 bool check_word(const char* word, hashmap_t hashtable[]){
   // Remove punctuation from beginning and end of word.
   char punctuation[LENGTH];
-  strcpy(punctuation, "!\"#$%&\'()*+,-./:;?@[\\]^_`{|}~ ");
+  strlcpy(punctuation, "!\"#$%&\'()*+,-./:;?@[\\]^_`{|}~ ", LENGTH);
   char* temp_word = malloc(LENGTH); 
 
-  int beginning_word = 0;
-  int end_word = strlen(word);
-
-  for( int i = 0; i < strlen(punctuation); i++ ){
-    if( word[0] == punctuation[i] ){
-      beginning_word = 1;
-    }
-
-    if( word[end_word-1] == punctuation[i] ){
-      if( beginning_word == 1 ){
-        end_word = end_word - 2;
-      }
-      else{
-        end_word = end_word - 1;
-      }
-    }
-  }
-
-  for( int i = 0; i < end_word; i++ ){
-    temp_word[i] = word[i + beginning_word];
+  for( int i = 0; i < strlen(word); i++ ){
+    temp_word[i] = word[i];
   }
 
   // By default all lower_case(word) equals cursor:
@@ -178,10 +157,12 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
     // Set new_node->word equal to word.
     node* new_node = malloc(sizeof(node));
     new_node->next = NULL;
-    strncpy(new_node->word, word, LENGTH);
+    if(strlcpy(new_node->word, word, LENGTH) >= LENGTH){
+      return false;
+    }
 
     // Set int bucket to hash_function(word).
-    int bucket = hash_function(word);
+    int bucket = hash_function(new_node->word);
 
     // if hashtable[bucket] is NULL:
     if( hashtable[bucket] == NULL ){

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
   load_dictionary(dictionary_file, hashtable);
   printf("load_dictionary complete\n");
   
-  const char* correct_word = "inappropriateness's";
+  const char* correct_word = "ethiiopian";
   int bucket = hash_function(correct_word);
   printf("\nbucket: %d, word: %s\n", bucket, hashtable[bucket]->word);
 
