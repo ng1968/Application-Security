@@ -33,30 +33,53 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
     line[strlen(line)-1]='\0';
 
     // Read the line.
-    // Split the line on spaces and punctuation.
+    // Split the line on spaces.
     // https://stackoverflow.com/questions/26597977/split-string-with-multiple-delimiters-using-strtok-in-c
-    char delim[LENGTH] = "!@#$%^&*()_+-=[]{};\':\"<>,./?\\| ";
+    char delim[LENGTH] = " ";
     int i = 0;
 
-    char *words[LENGTH]; // Buffer
-    words[i] = strtok(line, delim);
+    char* words = strtok(line, delim);
     // For each word in line:
-    while( words[i] != NULL )
-    {
+    while( words != NULL ){
+      // Remove punctuation from beginning and end of word.
+      char punctuation[LENGTH];
+      strncpy(punctuation, "!\"#$%&\'()*+,-./:;?@[\\]^_`{|}~", LENGTH);
+      char* temp_word = malloc(LENGTH); 
+
+      int beginning_word = 0;
+      int end_word = strlen(words);
+
+      for( int i = 0; i < strlen(punctuation); i++ ){
+        if( words[0] == punctuation[i] ){
+          beginning_word = 1;
+        }
+
+        if( words[end_word-1] == punctuation[i] ){
+          if( beginning_word == 1 ){
+            end_word = end_word - 2;
+          }
+          else{
+            end_word = end_word - 1;
+          }
+        }
+      }
+      
+      for( int i = 0; i < end_word; i++ ){
+        temp_word[i] = words[i + beginning_word];
+      }
       // If not check_word(word):
-      if( check_word(words[i], hashtable) == false )
+      if( check_word(temp_word, hashtable) == false )
       {
         char* misspelled_word = malloc(LENGTH);
-        if( strlcpy(misspelled_word, words[i], LENGTH) >= LENGTH ){
-          return -1;
-        }
+        strncpy(misspelled_word, temp_word, LENGTH);
+        misspelled_word[LENGTH - 1] = '\0';
         // Append word to misspelled.
         misspelled[num_misspelled] = misspelled_word;
         // Increment num_misspelled.
         num_misspelled++;
       }
       i++;
-      words[i] = strtok(NULL, delim);
+      words = strtok(NULL, delim);
     }
   }
 
@@ -82,9 +105,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
  *  bool correct  = check_word(word, hashtable);
  **/
 bool check_word(const char* word, hashmap_t hashtable[]){
-  // Remove punctuation from beginning and end of word.
-  char punctuation[LENGTH];
-  strlcpy(punctuation, "!\"#$%&\'()*+,-./:;?@[\\]^_`{|}~ ", LENGTH);
   char* temp_word = malloc(LENGTH); 
 
   for( int i = 0; i < strlen(word); i++ ){
@@ -157,10 +177,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
     // Set new_node->word equal to word.
     node* new_node = malloc(sizeof(node));
     new_node->next = NULL;
-    if(strlcpy(new_node->word, word, LENGTH) >= LENGTH){
-      return false;
-    }
-
+    strncpy(new_node->word, word, LENGTH);
+    new_node->word[LENGTH-1] = '\0';
     // Set int bucket to hash_function(word).
     int bucket = hash_function(new_node->word);
 
