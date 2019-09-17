@@ -5,31 +5,31 @@
 
 int main(int argc, char **argv)
 { 
-  char* file_to_test = argv[1];
+  //char* file_to_test = argv[1];
   char* dictionary_file = argv[2];
 
   hashmap_t hashtable[HASH_SIZE];
-  char* misspelled[MAX_MISSPELLED];
+  //char* misspelled[MAX_MISSPELLED];
 
+  printf("Loading Dictionary from file: %s.\n", dictionary_file);
   load_dictionary(dictionary_file, hashtable);
-  printf("load_dictionary complete\n");
-  
-  const char* correct_word = "ethiiopian";
-  int bucket = hash_function(correct_word);
-  printf("\nbucket: %d, word: %s\n", bucket, hashtable[bucket]->word);
+  printf("Dictionary Loaded\n");
 
-  if( check_word(correct_word, hashtable) ){
-  	printf("\n%s was correctly spelled.\n", correct_word);
+  const char* question_mark_word = "?Test?";
+  if(check_word(question_mark_word, hashtable)){
+    printf("%s is correctly spelled.\n", question_mark_word);
   }
+  
+  /*FILE *fp = fopen(file_to_test, "r");
+  printf("Opended file to be checked: %s.\n", file_to_test);
 
-  FILE *fp = fopen(file_to_test, "r");
-  printf("Opended file\n");
+  printf("Running checks\n");
   int misspelled_num = check_words(fp, hashtable, misspelled);
-  printf("checked words\n");
+
   printf("\nThere were %d misspelled\n", misspelled_num);
   for(int i = 0; i < misspelled_num; i++){
   	printf("%s\n", misspelled[i]);
-  }
+  }*/
   
   return 0;
 }

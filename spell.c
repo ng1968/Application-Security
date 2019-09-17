@@ -67,7 +67,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
       for( int i = 0; i < end_word; i++ ){
         temp_word[i] = words[i + beginning_word];
       }
-      // If not check_word(word):
+
+      // Check_word(word):
       if( check_word(temp_word, hashtable) == false )
       {
         char* misspelled_word = malloc(LENGTH);
@@ -105,16 +106,35 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
  *  bool correct  = check_word(word, hashtable);
  **/
 bool check_word(const char* word, hashmap_t hashtable[]){
+  // Remove punctuation from beginning and end of word.
+  char punctuation[LENGTH];
+  strncpy(punctuation, "!\"#$%&\'()*+,-./:;?@[\\]^_`{|}~", LENGTH);
   char* temp_word = malloc(LENGTH); 
 
-  for( int i = 0; i < strlen(word); i++ ){
-    temp_word[i] = word[i];
+  int beginning_word = 0;
+  int end_word = strlen(word);
+
+  for( int i = 0; i < strlen(punctuation); i++ ){
+    if( word[0] == punctuation[i] ){
+      beginning_word = 1;
+    }
+
+    if( word[end_word-1] == punctuation[i] ){
+      if( beginning_word == 1 ){
+        end_word = end_word - 2;
+      }
+      else{
+        end_word = end_word - 1;
+      }
+    }
+  }
+  
+  // By default all lower_case(word) equals cursor:
+  for( int i = 0; i < end_word; i++ ){
+    temp_word[i] = tolower(word[i + beginning_word]);
   }
 
-  // By default all lower_case(word) equals cursor:
-  for( int i = 0; i < strlen(temp_word); i++ ){
-    temp_word[i] = tolower(temp_word[i]);
-  }
+  printf("%s\n", temp_word);
   // Set int bucket to the output of hash_function(word).
   int bucket = hash_function(temp_word);
   // Set hashmap_t cursor equal to hashmap[bucket].
