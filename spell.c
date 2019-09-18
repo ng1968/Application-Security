@@ -134,7 +134,6 @@ bool check_word(const char* word, hashmap_t hashtable[]){
     temp_word[i] = tolower(word[i + beginning_word]);
   }
 
-  printf("%s\n", temp_word);
   // Set int bucket to the output of hash_function(word).
   int bucket = hash_function(temp_word);
   // Set hashmap_t cursor equal to hashmap[bucket].

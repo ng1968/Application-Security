@@ -1,4 +1,5 @@
 language: c
-script: 
-  make
+install:
+  sudo apt-get install -y build-essential check
+script:
   make test

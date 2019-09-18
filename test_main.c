@@ -12,8 +12,9 @@ START_TEST(test_dictionary_normal)
     // Here we can test if certain words ended up in certain buckets
     // to ensure that our load_dictionary works as intended. I leave
     // this as an exercise.
-    const char* expected = "inappropriateness's";
-    ck_assert(strncmp(hashtable[1]->word, expected, LENGTH) == 0);
+    const char* expected = "first";
+    int bucket = hash_function(expected);
+    ck_assert(strncmp(hashtable[bucket]->word, expected, LENGTH) == 0);
 }
 END_TEST
 
@@ -62,6 +63,7 @@ check_word_suite(void)
     check_word_case = tcase_create("Core");
     tcase_add_test(check_word_case, test_check_word_normal);
     tcase_add_test(check_word_case, test_check_words_normal);
+    tcase_add_test(check_word_case, test_dictionary_normal);
     suite_add_tcase(suite, check_word_case);
 
     return suite;

@@ -24,7 +24,7 @@ prog: dictionary.o spell.o main.o
 	gcc -Wall -o spell_check dictionary.o spell.o main.o
 
 clean:
-	rm dictionary.o spell.o main.o test_main.o check_spell.o
+	rm dictionary.o dictionary.h.gch spell.o main.o test_main.o check_spell.o
 
 cleanall:clean
 	rm spell_check
