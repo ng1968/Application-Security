@@ -34,12 +34,11 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
 
     // Read the line.
     // Split the line on spaces.
-    // https://stackoverflow.com/questions/26597977/split-string-with-multiple-delimiters-using-strtok-in-c
     char delim[LENGTH] = " ";
 
     char* words = strtok(line, delim);
     // For each word in line:
-    while( words != NULL ){
+    while( words != NULL && num_misspelled < MAX_MISSPELLED){
       // Remove punctuation from beginning and end of word.
       char punctuation[LENGTH];
       strncpy(punctuation, "!@#$%^&*()_+-={}[]:”;’|\\<>,.?/`~", LENGTH);
@@ -66,7 +65,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
       for( int i = 0; i < end_word; i++ ){
         temp_word[i] = words[i + beginning_word];
       }
-      // If not check_word(word):
+      // If word is misspelled:
       if( check_word(temp_word, hashtable) == false )
       {
         char* misspelled_word = malloc(LENGTH);
@@ -179,13 +178,13 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
   if( dict_file == NULL ){
     // return false.
     return false;
-	}
+  }
 
   // While word in dict_file is not EOF (end of file):
   char word[LENGTH];
   while( fgets(word,sizeof word, dict_file) ){
-  	// Removed new line character
-  	word[strlen(word)-1]='\0';
+    // Removed new line character
+    word[strlen(word)-1]='\0';
 
     // Set hashmap_t new_node to a new node.
     // Set new_node->next to NULL.
