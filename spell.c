@@ -39,7 +39,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
 
     char* words = strtok(line, delim);
     // For each word in line:
-    while( words != NULL && num_misspelled < MAX_MISSPELLED){
+    while( words != NULL ){
       // Remove punctuation from beginning and end of word.
       char punctuation[LENGTH];
       strncpy(punctuation, "!@#$%^&*()_+-={}[]:”;’|\\<>,.?/`~", LENGTH);
@@ -66,8 +66,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
       for( int i = 0; i < end_word; i++ ){
         temp_word[i] = words[i + beginning_word];
       }
-
-      // Check_word(word):
+      // If not check_word(word):
       if( check_word(temp_word, hashtable) == false )
       {
         char* misspelled_word = malloc(LENGTH);
@@ -78,7 +77,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
         // Increment num_misspelled.
         num_misspelled++;
       }
-
       words = strtok(NULL, delim);
     }
   }
@@ -127,8 +125,7 @@ bool check_word(const char* word, hashmap_t hashtable[]){
       }
     }
   }
-  
-  // By default all lower_case(word) equals cursor:
+
   for( int i = 0; i < end_word; i++ ){
     temp_word[i] = tolower(word[i + beginning_word]);
   }
@@ -174,7 +171,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
   for( int i = 0; i < HASH_SIZE; i++ ){
     hashtable[i] = NULL;
   }
-  
+
   // Open dict_file from path stored in dictionary.
   FILE* dict_file = fopen(dictionary_file, "r");
 
@@ -182,13 +179,13 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
   if( dict_file == NULL ){
     // return false.
     return false;
-  }
-  
+	}
+
   // While word in dict_file is not EOF (end of file):
   char word[LENGTH];
   while( fgets(word,sizeof word, dict_file) ){
-    // Removed new line character
-    word[strlen(word)-1]='\0';
+  	// Removed new line character
+  	word[strlen(word)-1]='\0';
 
     // Set hashmap_t new_node to a new node.
     // Set new_node->next to NULL.
@@ -196,7 +193,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
     node* new_node = malloc(sizeof(node));
     new_node->next = NULL;
     strncpy(new_node->word, word, LENGTH);
-
+    new_node->word[LENGTH-1] = '\0';
     // Set int bucket to hash_function(word).
     int bucket = hash_function(new_node->word);
 
@@ -214,6 +211,5 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
     }
   }
 
-  fclose(dict_file);
   return true;
 }
