@@ -61,6 +61,7 @@ START_TEST(test_word_with_numbers)
 {
     hashmap_t hashtable[HASH_SIZE];
     ck_assert(load_dictionary(TESTDICT, hashtable));
+
     // Here we can test if words with numbers are handled properly.
     const char* word_number_beginning = "1first";
     const char* word_number_end = "first1";
@@ -76,12 +77,13 @@ END_TEST
 START_TEST(test_multiple_punctuation)
 {
     hashmap_t hashtable[HASH_SIZE];
-    ck_assert(load_dictionary(TESTDICT, hashtable));
+    load_dictionary(TESTDICT, hashtable);
+
     // Here we can test if words with multiple punctuation are handled properly.
-    const char* word_punctuation_beginning = "!@#first";
-    const char* word_punctuation_end = "first$%^";
-    const char* word_punctuation_in_middle = "fir234st";
-    const char* word_punctuation_at_both_ends = ")(*first1&^%";
+    const char* word_punctuation_beginning = "!@#second";
+    const char* word_punctuation_end = "second$%^";
+    const char* word_punctuation_in_middle = "seco234nd";
+    const char* word_punctuation_at_both_ends = ")(*second1&^%";
     ck_assert(check_word(word_punctuation_beginning, hashtable));
     ck_assert(check_word(word_punctuation_end, hashtable));
     ck_assert(!check_word(word_punctuation_in_middle, hashtable));
@@ -96,8 +98,8 @@ check_word_suite(void)
     TCase * check_word_case;
     suite = suite_create("check_word");
     check_word_case = tcase_create("Core");
-    tcase_add_test(check_word_case, test_multiple_punctuation);
     tcase_add_test(check_word_case, test_word_with_numbers);
+    tcase_add_test(check_word_case, test_multiple_punctuation);
     tcase_add_test(check_word_case, test_check_word_normal);
     tcase_add_test(check_word_case, test_check_words_normal);
     tcase_add_test(check_word_case, test_dictionary_normal);

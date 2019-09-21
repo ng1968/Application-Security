@@ -10,7 +10,7 @@ void trim_punctuation( char *word, char *temp_word){
 // Remove punctuation from beginning and end of word.
   char punctuation[LENGTH];
   strncpy(punctuation, "!@#$%^&*()_+-={}[]:”;’|\\<>,.?/`~", LENGTH);
-
+  
   int beginning_word = 0;
   int end_word = strlen(word)-1;
 
@@ -21,7 +21,7 @@ void trim_punctuation( char *word, char *temp_word){
   while( !isalpha(word[end_word]) ){
     end_word--;
   }
-
+  
   int j = 0;
   for( int i = beginning_word; i <= end_word; i++ ){
     temp_word[j] = word[i];
@@ -113,6 +113,7 @@ bool check_word(const char* word, hashmap_t hashtable[]){
 
   // Set int bucket to the output of hash_function(word).
   int bucket = hash_function(temp_word);
+
   // Set hashmap_t cursor equal to hashmap[bucket].
   hashmap_t cursor = hashtable[bucket];
 
