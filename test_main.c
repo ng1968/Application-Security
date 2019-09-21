@@ -12,9 +12,12 @@ START_TEST(test_dictionary_normal)
     // Here we can test if certain words ended up in certain buckets
     // to ensure that our load_dictionary works as intended. I leave
     // this as an exercise.
-    const char* expected = "first";
-    int bucket = hash_function(expected);
-    ck_assert(strncmp(hashtable[bucket]->word, expected, LENGTH) == 0);
+    const char* expected_first = "first";
+    const char* expected_fourth = "fourth";
+    int bucket_first = hash_function(expected_first);
+    int bucket_fourth = hash_function(expected_fourth);
+    ck_assert(strncmp(hashtable[bucket_first]->word, expected_first, LENGTH) == 0);
+    ck_assert( hashtable[bucket_fourth] == NULL );
 }
 END_TEST
 
@@ -54,6 +57,38 @@ START_TEST(test_check_words_normal)
 }
 END_TEST
 
+START_TEST(test_word_with_numbers)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    ck_assert(load_dictionary(TESTDICT, hashtable));
+    // Here we can test if words with numbers are handled properly.
+    const char* word_number_beginning = "1first";
+    const char* word_number_end = "first1";
+    const char* word_number_in_middle = "fir1st";
+    const char* word_number_at_both_ends = "1first1";
+    ck_assert(check_word(word_number_beginning, hashtable));
+    ck_assert(check_word(word_number_end, hashtable));
+    ck_assert(!check_word(word_number_in_middle, hashtable));
+    ck_assert(check_word(word_number_at_both_ends, hashtable));
+}
+END_TEST
+
+START_TEST(test_multiple_punctuation)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    ck_assert(load_dictionary(TESTDICT, hashtable));
+    // Here we can test if words with multiple punctuation are handled properly.
+    const char* word_punctuation_beginning = "!@#first";
+    const char* word_punctuation_end = "first$%^";
+    const char* word_punctuation_in_middle = "fir234st";
+    const char* word_punctuation_at_both_ends = ")(*first1&^%";
+    ck_assert(check_word(word_punctuation_beginning, hashtable));
+    ck_assert(check_word(word_punctuation_end, hashtable));
+    ck_assert(!check_word(word_punctuation_in_middle, hashtable));
+    ck_assert(check_word(word_punctuation_at_both_ends, hashtable));
+}
+END_TEST
+
 Suite *
 check_word_suite(void)
 {
@@ -61,6 +96,8 @@ check_word_suite(void)
     TCase * check_word_case;
     suite = suite_create("check_word");
     check_word_case = tcase_create("Core");
+    tcase_add_test(check_word_case, test_multiple_punctuation);
+    tcase_add_test(check_word_case, test_word_with_numbers);
     tcase_add_test(check_word_case, test_check_word_normal);
     tcase_add_test(check_word_case, test_check_words_normal);
     tcase_add_test(check_word_case, test_dictionary_normal);
@@ -83,4 +120,3 @@ main(void)
     srunner_free(runner);
     return (failed == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
-

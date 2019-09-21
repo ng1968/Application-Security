@@ -5,6 +5,30 @@
 #include "dictionary.h"
 
 /**
+**/
+void trim_punctuation( char *word, char *temp_word){
+// Remove punctuation from beginning and end of word.
+  char punctuation[LENGTH];
+  strncpy(punctuation, "!@#$%^&*()_+-={}[]:”;’|\\<>,.?/`~", LENGTH);
+
+  int beginning_word = 0;
+  int end_word = strlen(word)-1;
+
+  while( !isalpha(word[beginning_word]) ){
+    beginning_word++;
+  }
+
+  while( !isalpha(word[end_word]) ){
+    end_word--;
+  }
+
+  int j = 0;
+  for( int i = beginning_word; i <= end_word; i++ ){
+    temp_word[j] = word[i];
+    j++;
+  }
+}
+/**
  * Array misspelled is populated with words that are misspelled. Returns the length of misspelled.
  */
 /**
@@ -39,32 +63,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
     char* words = strtok(line, delim);
     // For each word in line:
     while( words != NULL && num_misspelled < MAX_MISSPELLED){
-      // Remove punctuation from beginning and end of word.
-      char punctuation[LENGTH];
-      strncpy(punctuation, "!@#$%^&*()_+-={}[]:”;’|\\<>,.?/`~", LENGTH);
       char* temp_word = malloc(LENGTH); 
 
-      int beginning_word = 0;
-      int end_word = strlen(words);
-
-      for( int i = 0; i < strlen(punctuation); i++ ){
-        if( words[0] == punctuation[i] ){
-          beginning_word = 1;
-        }
-
-        if( words[end_word-1] == punctuation[i] ){
-          if( beginning_word == 1 ){
-            end_word = end_word - 2;
-          }
-          else{
-            end_word = end_word - 1;
-          }
-        }
-      }
-      
-      for( int i = 0; i < end_word; i++ ){
-        temp_word[i] = words[i + beginning_word];
-      }
+      trim_punctuation(words, temp_word);
       // If word is misspelled:
       if( check_word(temp_word, hashtable) == false )
       {
@@ -102,31 +103,12 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
  *  bool correct  = check_word(word, hashtable);
  **/
 bool check_word(const char* word, hashmap_t hashtable[]){
-  // Remove punctuation from beginning and end of word.
-  char punctuation[LENGTH];
-  strncpy(punctuation, "!@#$%^&*()_+-={}[]:”;’|\\<>,.?/`~", LENGTH);
   char* temp_word = malloc(LENGTH); 
 
-  int beginning_word = 0;
-  int end_word = strlen(word);
+  trim_punctuation( word, temp_word);
 
-  for( int i = 0; i < strlen(punctuation); i++ ){
-    if( word[0] == punctuation[i] ){
-      beginning_word = 1;
-    }
-
-    if( word[end_word-1] == punctuation[i] ){
-      if( beginning_word == 1 ){
-        end_word = end_word - 2;
-      }
-      else{
-        end_word = end_word - 1;
-      }
-    }
-  }
-
-  for( int i = 0; i < end_word; i++ ){
-    temp_word[i] = tolower(word[i + beginning_word]);
+  for( int i = 0; i < strlen(temp_word); i++ ){
+    temp_word[i] = tolower(temp_word[i]);
   }
 
   // Set int bucket to the output of hash_function(word).
