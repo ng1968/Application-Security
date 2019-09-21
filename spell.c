@@ -35,6 +35,8 @@ void trim_punctuation( char *word, char *temp_word){
     temp_word[j] = word[i];
     j++;
   }
+
+  temp_word[strlen(temp_word)]='\0';
 }
 
 /**
@@ -61,8 +63,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
   int num_misspelled = 0;
 
   // While line in fp is not EOF (end of file):
-  char line[1024];
-  while(fgets(line,sizeof line, fp)){
+  char* line = malloc(1024);
+  while(fgets(line,1024, fp)){
     line[strlen(line)-1]='\0';
 
     // Read the line.
@@ -115,11 +117,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
 bool check_word(const char* word, hashmap_t hashtable[]){
   char* temp_word = malloc(LENGTH); 
 
-  // Trim punctuation or numbers from word.
-  trim_punctuation(word, temp_word);
-
-  for( int i = 0; i < strlen(temp_word); i++ ){
-    temp_word[i] = tolower(temp_word[i]);
+  // Making all characters in word lower case.
+  for( int i = 0; i < strlen(word); i++ ){
+    temp_word[i] = tolower(word[i]);
   }
 
   // Set int bucket to the output of hash_function(word).

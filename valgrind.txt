@@ -1,188 +1,178 @@
-# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./spell_check test1.txt wordlist.txt 
-
-==15330== Memcheck, a memory error detector
-==15330== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==15330== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==15330== Command: ./spell_check test1.txt wordlist.txt
-==15330== 
-load_dictionary complete
-
-bucket: 1, word: inappropriateness's
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
-==15330==    by 0x1095AC: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
-==15330==    by 0x109203: hash_function (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x1095BD: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4839D2A: strcmp (vg_replace_strmem.c:849)
-==15330==    by 0x1095F0: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4839D1E: strcmp (vg_replace_strmem.c:849)
-==15330==    by 0x1095F0: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x1095F3: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-
-inappropriateness's was correctly spelled.
-Opended file
-Take a sad sogn and make it better. Remember to let her under your skyn, then you begin to make it betta.
-Take
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
-==15330==    by 0x1095AC: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
-==15330==    by 0x109203: hash_function (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x1095BD: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4839D2A: strcmp (vg_replace_strmem.c:849)
-==15330==    by 0x1095F0: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x4839D1E: strcmp (vg_replace_strmem.c:849)
-==15330==    by 0x1095F0: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== Conditional jump or move depends on uninitialised value(s)
-==15330==    at 0x1095F3: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330==  Uninitialised value was created by a heap allocation
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-a
-sad
-sogn
-and
-make
-it
-better
-Remember
-to
-let
-her
-under
-your
-skyn
-then
-you
-begin
-to
-make
-it
-betta
-checked words
+valgrind --leak-check=full --track-origins=yes ./spell_check test1.txt wordlist.txt 
+==3259== Memcheck, a memory error detector
+==3259== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3259== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==3259== Command: ./spell_check test1.txt wordlist.txt
+==3259== 
+Loading Dictionary from file: wordlist.txt.
+Dictionary Loaded
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
+==3259==    by 0x109559: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
+==3259==    by 0x109203: hash_function (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10956A: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4839D2A: strcmp (vg_replace_strmem.c:849)
+==3259==    by 0x10959D: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4839D1E: strcmp (vg_replace_strmem.c:849)
+==3259==    by 0x10959D: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x1095A0: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+?Test? is correctly spelled.
+Opended file to be checked: test1.txt.
+Running checks
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
+==3259==    by 0x10927F: trim_punctuation (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10950D: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1093F0: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
+==3259==    by 0x109559: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
+==3259==    by 0x109203: hash_function (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10956A: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4839D2A: strcmp (vg_replace_strmem.c:849)
+==3259==    by 0x10959D: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x4839D1E: strcmp (vg_replace_strmem.c:849)
+==3259==    by 0x10959D: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x1095A0: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== Conditional jump or move depends on uninitialised value(s)
+==3259==    at 0x483931D: __strncpy_sse2_unaligned (vg_replace_strmem.c:555)
+==3259==    by 0x10944A: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259==  Uninitialised value was created by a heap allocation
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1093F0: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
 
 There were 3 misspelled
 sogn
 skyn
 betta
-==15330== 
-==15330== HEAP SUMMARY:
-==15330==     in use at exit: 6,897,058 bytes in 123,158 blocks
-==15330==   total heap usage: 123,162 allocs, 4 frees, 6,906,826 bytes allocated
-==15330== 
-==15330== 45 bytes in 1 blocks are definitely lost in loss record 1 of 6
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x109823: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== 135 bytes in 3 blocks are definitely lost in loss record 2 of 6
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10938B: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== 552 bytes in 1 blocks are still reachable in loss record 3 of 6
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x48CF0FA: __fopen_internal (iofopen.c:65)
-==15330==    by 0x10966E: load_dictionary (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x1097C1: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== 990 bytes in 22 blocks are definitely lost in loss record 4 of 6
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x10949C: check_word (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10937A: check_words (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x10987F: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== 6,789,776 bytes in 121,246 blocks are indirectly lost in loss record 5 of 6
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x1096A6: load_dictionary (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x1097C1: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== 6,895,336 (105,560 direct, 6,789,776 indirect) bytes in 1,885 blocks are definitely lost in loss record 6 of 6
-==15330==    at 0x483577F: malloc (vg_replace_malloc.c:309)
-==15330==    by 0x1096A6: load_dictionary (in /root/Desktop/Application-Security/spell_check)
-==15330==    by 0x1097C1: main (in /root/Desktop/Application-Security/spell_check)
-==15330== 
-==15330== LEAK SUMMARY:
-==15330==    definitely lost: 106,730 bytes in 1,911 blocks
-==15330==    indirectly lost: 6,789,776 bytes in 121,246 blocks
-==15330==      possibly lost: 0 bytes in 0 blocks
-==15330==    still reachable: 552 bytes in 1 blocks
-==15330==         suppressed: 0 bytes in 0 blocks
-==15330== 
-==15330== For lists of detected and suppressed errors, rerun with: -s
-==15330== ERROR SUMMARY: 210 errors from 14 contexts (suppressed: 0 from 0)
+==3259== 
+==3259== HEAP SUMMARY:
+==3259==     in use at exit: 6,898,138 bytes in 123,182 blocks
+==3259==   total heap usage: 123,186 allocs, 4 frees, 6,907,906 bytes allocated
+==3259== 
+==3259== 45 bytes in 1 blocks are definitely lost in loss record 1 of 7
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x1097BB: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== 135 bytes in 3 blocks are definitely lost in loss record 2 of 7
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x10942E: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== 1,035 bytes in 23 blocks are definitely lost in loss record 4 of 7
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1093F0: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== 1,035 bytes in 23 blocks are definitely lost in loss record 5 of 7
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x1094F6: check_word (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10941D: check_words (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10982F: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== 6,895,336 (105,560 direct, 6,789,776 indirect) bytes in 1,885 blocks are definitely lost in loss record 7 of 7
+==3259==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==3259==    by 0x109653: load_dictionary (in /root/Desktop/Application-Security/spell_check)
+==3259==    by 0x10978E: main (in /root/Desktop/Application-Security/spell_check)
+==3259== 
+==3259== LEAK SUMMARY:
+==3259==    definitely lost: 107,810 bytes in 1,935 blocks
+==3259==    indirectly lost: 6,789,776 bytes in 121,246 blocks
+==3259==      possibly lost: 0 bytes in 0 blocks
+==3259==    still reachable: 552 bytes in 1 blocks
+==3259==         suppressed: 0 bytes in 0 blocks
+==3259== Reachable blocks (those to which a pointer was found) are not shown.
+==3259== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==3259== 
+==3259== For lists of detected and suppressed errors, rerun with: -s
+==3259== ERROR SUMMARY: 231 errors from 17 contexts (suppressed: 0 from 0)

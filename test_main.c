@@ -4,6 +4,7 @@
 
 #define DICTIONARY "wordlist.txt"
 #define TESTDICT "test_worlist.txt"
+#define EDGE_CASES "edge_cases.txt"
 
 START_TEST(test_dictionary_normal)
 {
@@ -27,11 +28,8 @@ START_TEST(test_check_word_normal)
     load_dictionary(DICTIONARY, hashtable);
     const char* correct_word = "Justice";
     const char* punctuation_word_2 = "pl.ace";
-    const char* question_mark_word = "?Test?";
     ck_assert(check_word(correct_word, hashtable));
     ck_assert(!check_word(punctuation_word_2, hashtable));
-    // Test here: What if a word begins and ends with "?
-    ck_assert(check_word(question_mark_word, hashtable));
 }
 END_TEST
 
@@ -57,37 +55,17 @@ START_TEST(test_check_words_normal)
 }
 END_TEST
 
-START_TEST(test_word_with_numbers)
+START_TEST(test_edge_cases)
 {
     hashmap_t hashtable[HASH_SIZE];
-    ck_assert(load_dictionary(TESTDICT, hashtable));
-
-    // Here we can test if words with numbers are handled properly.
-    const char* word_number_beginning = "1first";
-    const char* word_number_end = "first1";
-    const char* word_number_in_middle = "fir1st";
-    const char* word_number_at_both_ends = "1first1";
-    ck_assert(check_word(word_number_beginning, hashtable));
-    ck_assert(check_word(word_number_end, hashtable));
-    ck_assert(!check_word(word_number_in_middle, hashtable));
-    ck_assert(check_word(word_number_at_both_ends, hashtable));
-}
-END_TEST
-
-START_TEST(test_multiple_punctuation)
-{
-    hashmap_t hashtable[HASH_SIZE];
-    load_dictionary(TESTDICT, hashtable);
-
-    // Here we can test if words with multiple punctuation are handled properly.
-    const char* word_punctuation_beginning = "!@#second";
-    const char* word_punctuation_end = "second$%^";
-    const char* word_punctuation_in_middle = "seco234nd";
-    const char* word_punctuation_at_both_ends = ")(*second1&^%";
-    ck_assert(check_word(word_punctuation_beginning, hashtable));
-    ck_assert(check_word(word_punctuation_end, hashtable));
-    ck_assert(!check_word(word_punctuation_in_middle, hashtable));
-    ck_assert(check_word(word_punctuation_at_both_ends, hashtable));
+    ck_assert(load_dictionary(DICTIONARY, hashtable));
+    
+    char *misspelled[MAX_MISSPELLED];
+    FILE *fp = fopen(EDGE_CASES, "r");
+    int num_misspelled = check_words(fp, hashtable, misspelled);
+    ck_assert(num_misspelled == 2);
+    ck_assert(strncmp(misspelled[0], "seco234nd", LENGTH) == 0);
+    ck_assert(strncmp(misspelled[1], "fir1st", LENGTH) == 0);
 }
 END_TEST
 
@@ -98,11 +76,10 @@ check_word_suite(void)
     TCase * check_word_case;
     suite = suite_create("check_word");
     check_word_case = tcase_create("Core");
-    tcase_add_test(check_word_case, test_word_with_numbers);
-    tcase_add_test(check_word_case, test_multiple_punctuation);
     tcase_add_test(check_word_case, test_check_word_normal);
     tcase_add_test(check_word_case, test_check_words_normal);
     tcase_add_test(check_word_case, test_dictionary_normal);
+    tcase_add_test(check_word_case, test_edge_cases);
     suite_add_tcase(suite, check_word_case);
 
     return suite;
