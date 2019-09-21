@@ -5,12 +5,20 @@
 #include "dictionary.h"
 
 /**
-**/
+ * Trims punctuation or numbers at the beggining or end of word.
+ */
+/**
+ * Inputs:
+ *  word:       A pointer to a word that might have punctuation.
+ *  temp_word:  A pointer to variable that will store trimmed word.
+ *
+ * Modifies:
+ *  temp_word: This will stored the trimmed word.
+ *
+ * Example:
+ *  trim_punctuation( word, temp_word);
+ **/
 void trim_punctuation( char *word, char *temp_word){
-// Remove punctuation from beginning and end of word.
-  char punctuation[LENGTH];
-  strncpy(punctuation, "!@#$%^&*()_+-={}[]:”;’|\\<>,.?/`~", LENGTH);
-  
   int beginning_word = 0;
   int end_word = strlen(word)-1;
 
@@ -28,6 +36,7 @@ void trim_punctuation( char *word, char *temp_word){
     j++;
   }
 }
+
 /**
  * Array misspelled is populated with words that are misspelled. Returns the length of misspelled.
  */
@@ -65,6 +74,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
     while( words != NULL && num_misspelled < MAX_MISSPELLED){
       char* temp_word = malloc(LENGTH); 
 
+      // Trim punctuation or numbers from word.
       trim_punctuation(words, temp_word);
       // If word is misspelled:
       if( check_word(temp_word, hashtable) == false )
@@ -105,7 +115,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
 bool check_word(const char* word, hashmap_t hashtable[]){
   char* temp_word = malloc(LENGTH); 
 
-  trim_punctuation( word, temp_word);
+  // Trim punctuation or numbers from word.
+  trim_punctuation(word, temp_word);
 
   for( int i = 0; i < strlen(temp_word); i++ ){
     temp_word[i] = tolower(temp_word[i]);
