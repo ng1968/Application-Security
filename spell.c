@@ -22,6 +22,9 @@ void trim_punctuation( char *word, char *temp_word){
   int beginning_word = 0;
   int end_word = strlen(word)-1;
 
+  if( end_word > LENGTH )
+    end_word = LENGTH - 1;
+  
   while( !isalpha(word[beginning_word]) ){
     beginning_word++;
   }
