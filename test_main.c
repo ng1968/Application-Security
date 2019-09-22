@@ -109,6 +109,18 @@ START_TEST(test_check_words_overflow)
 }
 END_TEST
 
+START_TEST(test_check_words_max_misspelled)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    ck_assert(load_dictionary(DICTIONARY, hashtable));
+    
+    char *misspelled[MAX_MISSPELLED];
+    FILE *fp = fopen("misspelled.txt", "r");
+    int num_misspelled = check_words(fp, hashtable, misspelled);
+    ck_assert(num_misspelled == MAX_MISSPELLED);
+}
+END_TEST
+
 Suite *
 check_word_suite(void)
 {
@@ -124,6 +136,7 @@ check_word_suite(void)
     tcase_add_test(check_word_case, test_check_words_normal);
     tcase_add_test(check_word_case, test_check_words_abnormal);
     tcase_add_test(check_word_case, test_check_words_overflow);
+    tcase_add_test(check_word_case, test_check_words_max_misspelled);
     suite_add_tcase(suite, check_word_case);
 
     return suite;

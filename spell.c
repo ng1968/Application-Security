@@ -30,7 +30,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
 
   // While line in fp is not EOF (end of file):
   char line[1024];
-  while(fgets(line,sizeof line, fp)){
+  while(fgets(line,sizeof line, fp) && num_misspelled < MAX_MISSPELLED){
     line[strlen(line)-1]='\0';
 
     // Read the line.
