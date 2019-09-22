@@ -1,4 +1,4 @@
-root@kali:~/Desktop/Application-Security# valgrind --leak-check=full --track-origins=yes ./spell_check test1.txt wordlist.txt 
+valgrind --leak-check=full --track-origins=yes ./spell_check test1.txt wordlist.txt 
 ==1552== Memcheck, a memory error detector
 ==1552== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
 ==1552== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
