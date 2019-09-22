@@ -43,7 +43,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
       char* word = malloc(LENGTH);
       strncpy(word, words, LENGTH);
       char* temp_word = malloc(LENGTH);
-      
+
       // Trim punctuation or numbers from word.
       int beginning_word = 0;
       int end_word = strlen(word)-1;
@@ -66,7 +66,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
       }
 
       temp_word[j]='\0';
-      
+
       // If word is misspelled:
       if( check_word(temp_word, hashtable) == false )
       {
