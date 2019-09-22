@@ -4,43 +4,6 @@
 #include <ctype.h>
 #include "dictionary.h"
 
-/**
- * Trims punctuation or numbers at the beggining or end of word.
- */
-/**
- * Inputs:
- *  word:       A pointer to a word that might have punctuation.
- *  temp_word:  A pointer to variable that will store trimmed word.
- *
- * Modifies:
- *  temp_word: This will stored the trimmed word.
- *
- * Example:
- *  trim_punctuation( word, temp_word);
- **/
-void trim_punctuation( char *word, char *temp_word){
-  int beginning_word = 0;
-  int end_word = strlen(word)-1;
-
-  if( end_word > LENGTH )
-    end_word = LENGTH - 1;
-  
-  while( !isalpha(word[beginning_word]) ){
-    beginning_word++;
-  }
-
-  while( !isalpha(word[end_word]) ){
-    end_word--;
-  }
-  
-  int j = 0;
-  for( int i = beginning_word; i <= end_word; i++ ){
-    temp_word[j] = word[i];
-    j++;
-  }
-
-  temp_word[strlen(temp_word)]='\0';
-}
 
 /**
  * Array misspelled is populated with words that are misspelled. Returns the length of misspelled.
@@ -66,8 +29,8 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
   int num_misspelled = 0;
 
   // While line in fp is not EOF (end of file):
-  char* line = malloc(1024);
-  while(fgets(line,1024, fp)){
+  char line[1024];
+  while(fgets(line,sizeof line, fp)){
     line[strlen(line)-1]='\0';
 
     // Read the line.
@@ -77,16 +40,38 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
     char* words = strtok(line, delim);
     // For each word in line:
     while( words != NULL && num_misspelled < MAX_MISSPELLED){
-      char* temp_word = malloc(LENGTH); 
-
+      char* word = malloc(LENGTH);
+      strncpy(word, words, LENGTH);
+      char* temp_word = malloc(LENGTH);
+      
       // Trim punctuation or numbers from word.
-      trim_punctuation(words, temp_word);
+      int beginning_word = 0;
+      int end_word = strlen(word)-1;
+
+      if( end_word > LENGTH )
+        end_word = LENGTH - 1;
+      
+      while( !isalpha(word[beginning_word]) ){
+        beginning_word++;
+      }
+
+      while( !isalpha(word[end_word]) ){
+        end_word--;
+      }
+      
+      int j = 0;
+      for( int i = beginning_word; i <= end_word; i++ ){
+        temp_word[j] = word[i];
+        j++;
+      }
+
+      temp_word[j]='\0';
+      
       // If word is misspelled:
       if( check_word(temp_word, hashtable) == false )
       {
         char* misspelled_word = malloc(LENGTH);
         strncpy(misspelled_word, temp_word, LENGTH);
-        misspelled_word[LENGTH - 1] = '\0';
         // Append word to misspelled.
         misspelled[num_misspelled] = misspelled_word;
         // Increment num_misspelled.
@@ -118,11 +103,12 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
  *  bool correct  = check_word(word, hashtable);
  **/
 bool check_word(const char* word, hashmap_t hashtable[]){
-  char* temp_word = malloc(LENGTH); 
+  char* temp_word = malloc(LENGTH);
+  strncpy(temp_word, word, LENGTH); 
 
   // Making all characters in word lower case.
-  for( int i = 0; i < strlen(word); i++ ){
-    temp_word[i] = tolower(word[i]);
+  for( int i = 0; i < strlen(temp_word); i++ ){
+    temp_word[i] = tolower(temp_word[i]);
   }
 
   // Set int bucket to the output of hash_function(word).
@@ -134,7 +120,7 @@ bool check_word(const char* word, hashmap_t hashtable[]){
   // While cursor is not NULL:
   while( cursor != NULL ){
     //If word equals cursor->word:
-    if( strcmp(temp_word, cursor->word) == 0 ){
+    if( strncmp(temp_word, cursor->word, LENGTH) == 0 ){
       // return True.
       return true;
     }

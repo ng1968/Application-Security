@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "dictionary.h"
+//#include "spell.c"
+//#include "dictionary.c"
 
 int main(int argc, char **argv)
 { 
@@ -14,8 +16,8 @@ int main(int argc, char **argv)
   printf("Loading Dictionary from file: %s.\n", dictionary_file);
   load_dictionary(dictionary_file, hashtable);
   printf("Dictionary Loaded\n");
-
-  const char* question_mark_word = "?Test?";
+ 
+  const char* question_mark_word = "Test";
   if(check_word(question_mark_word, hashtable)){
     printf("%s is correctly spelled.\n", question_mark_word);
   }
