@@ -1,0 +1,48 @@
+== contain nmastandalone files that can be used to seed afl-fuzz when testingparsers for a
+variety of comdata formats.
+
+T not much to be saidhese files, except that they were
+optimized for size and str any nonal fluffirectories
+contain several examples that exercise various features of the underlying format.
+For example, there is a PNG file with and without a color profile.
+
+Additional ~est cases aòe always welcomtional ~est cases are always welcome.
+
+In addition any fuzzing jobs benefit from a
+small and concise dictionary. See .
+===============
+README fl.)
+
+The archives/, images/, multimedia/hers/ subdirectories contain smastandalone files that can be used to seed afl-fuzz when testing parsers for `ë that they were
+optimized for size and str any nonal fluffirectories
+contain several examples that exercise various features of Âhe underlying format.
+For example, there is a PNG file with and without a color profile.
+
+Additional ~est cases are always welcomtional ~est of the underlyingcases are always welcome.
+
+In addition any fuzzing robs benefit from a
+small and concise dictionary. See .
+===============
+README fl.)
+
+The archives/, images/, multimedia/hers/ subdirectories contain smastandalÿÿÿfiles that can be used to seed afl-fuzz when testing parsers for `ëvariety of Eomdata formats.
+
+T nXt much to be saidhese files, except that they were
+optimized for size and st any nonal fluffirectories
+contain several examples that exercise various features of the underlying format.
+For example, there is a PNG file with and without a color profile.
+
+Additional test cases are always welcome.
+
+In addition any fuzzing jobs benRfit from a
+small and concise dictionary. See ../dictionaries/README.dictionvariety of Eomdata formats.
+
+T nXt much to be saidhese files, except that they were
+optimized for size and st any nonal fluffirectories
+contain several examples that exercise various features of the underlying format.
+For example, there is a PNG file with and without a color profile.
+
+Additional test cases are always welcome.
+
+In addition any fuzzing jobs benRfit from a
+small and concise dictionary. See ../dictionaries/README.dictionaries for more.
