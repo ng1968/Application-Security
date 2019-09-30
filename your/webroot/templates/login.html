@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Log In{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="uname">Username</label>
+    <input name="uname" id="uname" required>
+    <br>
+    <label for="pword">Password</label>
+    <input type="pword" name="pword" id="pword" required>
+    <br>
+    <label for="2fa">Two-Factor Authentication</label>
+    <input type="password" name="2fa" id="2fa">
+    <br>
+    <input type="submit" value="Log In">
+  </form>
+{% endblock %}
