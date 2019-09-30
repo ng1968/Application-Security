@@ -8,13 +8,16 @@ app.secret_key = b'd338cdce585dc7662749c2282b5b1d0938fd7c102a9ba14ad0bab6057a7cf
 
 @app.route('/')
 def index():
-  return redirect(url_for('login'))
+  if 'username' in session:
+    return 'Logged in as %s' % escape(session['username'])
+  return 'You are not logged in'
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
   error = None
   if request.method == 'POST':
     if validate_login( request.form['uname'], request.form['pword'], request.form['2fa'] ):
+      session['username'] = request.form['uname']
       return 'success'
     else:
       return 'failure'
