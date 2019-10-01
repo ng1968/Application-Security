@@ -17,4 +17,8 @@
     <br>
     <input type="submit" value="Log In">
   </form>
+  
+  {% if login_output %}
+  <p id="result">{{login_output}}</p>
+  {% endif %}
 {% endblock %}

@@ -17,4 +17,10 @@
     <br>
     <input type="submit" value="Register">
   </form>
+
+  {% if register_output %}
+    <p id="success">{{register_output}}<p>
+  {% endif %}
+
+
 {% endblock %}

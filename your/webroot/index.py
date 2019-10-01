@@ -14,30 +14,50 @@ def index():
 def login():
   error = None
   if request.method == 'POST':
-    if validate_login( request.form['uname'], request.form['pword'], request.form['2fa'] ):
+    login_valid = validate_login(request.form['uname'], request.form['pword'], request.form['2fa'])
+    if login_valid == 1:
       session['username'] = request.form['uname']
-      return 'success'
-    else:
-      return 'failure'
+      return  render_template('login.html', login_output='success')
+    elif login_valid == 2:
+      return  render_template('login.html', login_output='incorrect')
+    elif login_valid == 3:
+      return  render_template('login.html', login_output='failure: two-factor wrong')
   # the code below is executed if the request method
   # was GET or the credentials were invalid
   return render_template('login.html', error=error)
 
 def validate_login( uname, pword, twofa):
-# Checks if the username is already in the database.
-  login_found = False
+  # Checks if credential match.
+  # 1 = Valid login.
+  # 2 = incorrect username or password.
+  # 3 = two-fa wrong.
+  login_found = 0
+  # Opens file
   with open(DATABASE, 'r') as read_descriptor:
     line_input = read_descriptor.readline()
 
+    # Loop that reads file line by line.
     while line_input:
       line = line_input.split()
 
       if twofa == '':
-        if( line[0] == uname and line[1] == pword and line[2] == 'empty'):
-          login_found = True
-
-      if( line[0] == uname and line[1] == pword and line[2] == twofa ):
-        login_found = True
+        if( line[0] == uname and line[1] == pword and line[2] == 'empty' ):
+          login_found = 1
+          break
+        elif( line[0] == uname and line[1] == pword and line[2] != 'empty' ):
+          login_found = 3
+          break
+        elif( line[0] != uname or line[1] != pword ):
+          login_found = 2
+      else:
+        if( line[0] == uname and line[1] == pword and line[2] == twofa ):
+          login_found = 1
+          break
+        elif( line[0] == uname and line[1] == pword and line[2] != twofa ):
+          login_found = 3
+          break
+        elif( line[0] != uname or line[1] != pword ):
+          login_found = 2
 
       line_input = read_descriptor.readline()
   
@@ -50,7 +70,7 @@ def register():
     # Checks if the username is already in the database.
     with open(DATABASE, 'r') as read_descriptor:
       if request.form['uname'] in read_descriptor.read():
-        return '<p id="failure">Failure! Username already exists, try again<p>'
+        return render_template('register.html', register_output='Failure! Username already exists, try again')
       else:
         # Writes the registration information to the database.
         with open(DATABASE, 'a+') as write_descriptor:
@@ -60,7 +80,7 @@ def register():
           else:
             registration_info = '{} {} {}\n'.format(request.form['uname'], request.form['pword'], request.form['2fa'])
           write_descriptor.write(registration_info)
-          return '<p id="success">Account registered Success!<p>'
+          return render_template('register.html', register_output='Account registered Success!')
   # the code below is executed if the request method
   # was GET or the credentials were invalid
   return render_template('register.html', error=error)
