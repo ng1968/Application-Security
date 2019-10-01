@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+{% if session['username'] %}
+  <p>You are logged in!</p>
+{% else %}
   <form method="post">
     <label for="uname">Username</label>
     <input name="uname" id="uname" required>
@@ -17,8 +20,10 @@
     <br>
     <input type="submit" value="Log In">
   </form>
-  
-  {% if login_output %}
-  <p id="result">{{login_output}}</p>
-  {% endif %}
+{% endif %}
+
+{% if login_output %}
+    <p id="result">{{login_output}}</p>
+{% endif %}
+
 {% endblock %}

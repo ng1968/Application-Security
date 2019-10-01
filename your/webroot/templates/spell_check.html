@@ -14,12 +14,13 @@
     <br>
     <input type="submit" value="Check Spelling">
   </form>
-
-  <h3>Results</h3>
-  <h4>Input Text</h4>
-  <p id="textout">{{textout}}</p>
-  <h4>Misspelled Words</h4>
-  <p id="misspelled">{{misspelled}}</p>
+  {% if textout %}
+    <h3>Results</h3>
+    <h4>Input Text</h4>
+    <p id="textout">{{textout}}</p>
+    <h4>Misspelled Words</h4>
+    <p id="misspelled">{{misspelled}}</p>
+  {% endif %}
 {% else %}
   <p>You need to login in order to use this tool: <a href="login">Login</a></p>
 {% endif %}

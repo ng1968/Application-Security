@@ -1,6 +1,7 @@
 from flask import Flask, escape, redirect, render_template, request, session, url_for
 import subprocess
 
+
 DATABASE = 'database.txt'
 app = Flask(__name__)
 
@@ -8,6 +9,7 @@ app.secret_key = b'd338cdce585dc7662749c2282b5b1d0938fd7c102a9ba14ad0bab6057a7cf
 
 @app.route('/')
 def index():
+	# The root directory automatically redirects to login.
   return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -39,7 +41,7 @@ def validate_login( uname, pword, twofa):
     # Loop that reads file line by line.
     while line_input:
       line = line_input.split()
-
+      # If they left the two-fa field empty
       if twofa == '':
         if( line[0] == uname and line[1] == pword and line[2] == 'empty' ):
           login_found = 1
