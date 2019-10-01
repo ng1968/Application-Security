@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Spell Check{% endblock %}</h1>
+{% endblock %}
+
+
+{% block content %}
+{% if session['username'] %}
+  <form method="post">
+    <label for="inputtext">Text Input</label>
+    <br>
+    <textarea style="width: 80%; height: 50%" name="inputtext" id="inputtext" required></textarea>
+    <br>
+    <input type="submit" value="Check Spelling">
+  </form>
+
+  <h3>Results</h3>
+  <h4>Input Text</h4>
+  <p id="textout">{{textout}}</p>
+  <h4>Misspelled Words</h4>
+  <p id="misspelled">{{misspelled}}</p>
+{% else %}
+  <p>You need to login in order to use this tool: <a href="login">Login</a></p>
+{% endif %}
+
+
+
+{% endblock %}

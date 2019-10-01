@@ -1,5 +1,5 @@
 from flask import Flask, escape, redirect, render_template, request, session, url_for
-
+import subprocess
 
 DATABASE = 'database.txt'
 app = Flask(__name__)
@@ -8,9 +8,7 @@ app.secret_key = b'd338cdce585dc7662749c2282b5b1d0938fd7c102a9ba14ad0bab6057a7cf
 
 @app.route('/')
 def index():
-  if 'username' in session:
-    return 'Logged in as %s' % escape(session['username'])
-  return 'You are not logged in'
+  return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -21,8 +19,6 @@ def login():
       return 'success'
     else:
       return 'failure'
-    
-
   # the code below is executed if the request method
   # was GET or the credentials were invalid
   return render_template('login.html', error=error)
@@ -69,9 +65,21 @@ def register():
   # was GET or the credentials were invalid
   return render_template('register.html', error=error)
 
-@app.route('/spell_check')
+@app.route('/spell_check', methods=['POST', 'GET'])
 def spell_check():
-  return 'spell_check'
+  error = None
+
+  if request.method == 'POST':
+    filename = 'input_file_%s.txt' % escape(session['username'])
+    with open(filename, 'w+') as write_descriptor:
+      write_descriptor.write(request.form['inputtext'])
+
+    command = ['./spell_check', filename, 'wordlist.txt']
+    output = subprocess.run(command, stdout=subprocess.PIPE)
+    return render_template('spell_check.html', textout=request.form['inputtext'], misspelled=output.stdout.decode('utf-8'))
+
+  return render_template('spell_check.html', error=error)
+
 
 @app.route('/logout')
 def logout():
