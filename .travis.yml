@@ -18,7 +18,7 @@ matrix:
     before_script:
       cd your/webroot/
     script:
-      tox
+      echo 'done'
 
 
     
