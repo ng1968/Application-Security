@@ -1,5 +1,21 @@
-language: c
-install:
-  sudo apt-get install -y build-essential check
-script:
-  make test
+matrix:
+  include:
+    language: c
+    install:
+      sudo apt-get install -y build-essential check
+    script:
+      make test
+    
+    language: python
+    install:
+      sudo apt-get install python3-pip
+      sudo pip install flask
+      sudo pip install tox
+      sudo pip install tox-travis
+    before_script:
+      cd your/webroot/
+    script:
+      env FLASK_APP=index.py flask run
+
+
+    
