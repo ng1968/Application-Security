@@ -3,3 +3,4 @@ test2 test2 empty
 asdc as empty
 asdfwe fwer wger
 adsf wecer ecec
+<script>   alert("Hello! I am an alert box!"); </script> test test

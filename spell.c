@@ -31,7 +31,12 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]){
   // While line in fp is not EOF (end of file):
   char line[1024];
   while(fgets(line,sizeof line, fp) && num_misspelled < MAX_MISSPELLED){
-    line[strlen(line)-1]='\0';
+    if(line[strlen(line)-1]=='\n'){
+      line[strlen(line)-1]='\0';
+    }
+    else{
+      line[strlen(line)]='\0';
+    }
 
     // Read the line.
     // Split the line on spaces.
