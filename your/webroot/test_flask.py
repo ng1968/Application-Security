@@ -1,0 +1,30 @@
+"""
+You can auto-discover and run all tests with this command:
+
+    $ pytest
+
+Documentation:
+
+* https://docs.pytest.org/en/latest/
+* https://docs.pytest.org/en/latest/fixture.html
+* http://flask.pocoo.org/docs/latest/testing/
+"""
+
+import pytest
+import index
+
+@pytest.fixture
+def app():
+    app = index.create_app()
+    return app.test_client()
+
+def test_index(app):
+    res = app.get("/")
+    #print(dir(res), res.status_code)
+    assert res.status_code == 200
+
+"""
+def test_some_id(app):
+    res = app.get("/foo/12345")
+    assert res.status_code == 200
+    assert b"12345" in res.data"""
