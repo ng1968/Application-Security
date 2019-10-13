@@ -53,7 +53,7 @@ def login():
       if models.UserModel.verify_hash(request.form['2fa'], current_user.two_factor):
         access_token = create_access_token(identity = request.form['uname'])
         refresh_token = create_refresh_token(identity = request.form['uname'])
-        resp = make_response(render_template('login.html', login_output='success'))
+        resp = make_response(render_template('login.html', current_user=current_user.username, login_output='success'))
         set_access_cookies(resp, access_token)
         set_refresh_cookies(resp, refresh_token)
         resp.headers['Content-Security-Policy'] = "default-src 'self'"
@@ -140,14 +140,15 @@ def spell_check():
     output = subprocess.run(command, stdout=subprocess.PIPE)
     subprocess.run(['rm', filename], stdout=subprocess.PIPE)
     current_user = get_jwt_identity()
-    resp = make_response(render_template('spell_check.html', textout=request.form['inputtext'], csrf_token=(get_raw_jwt() or {}).get("csrf"), misspelled=output.stdout.decode('utf-8')))
+    resp = make_response(render_template('spell_check.html', textout=request.form['inputtext'], current_user=current_user, csrf_token=(get_raw_jwt() or {}).get("csrf"), misspelled=output.stdout.decode('utf-8')))
     resp.headers['Content-Security-Policy'] = "default-src 'self'"
     resp.headers['X-Content-Type-Options'] = 'nosniff'
     resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
     resp.headers['X-XSS-Protection'] = '1; mode=block'
     return resp, 200
 
-  resp = make_response(render_template('spell_check.html', csrf_token=(get_raw_jwt() or {}).get("csrf")))
+  current_user = get_jwt_identity()
+  resp = make_response(render_template('spell_check.html', current_user=current_user, csrf_token=(get_raw_jwt() or {}).get("csrf")))
   resp.headers['Content-Security-Policy'] = "default-src 'self'"
   resp.headers['X-Content-Type-Options'] = 'nosniff'
   resp.headers['X-Frame-Options'] = 'SAMEORIGIN'

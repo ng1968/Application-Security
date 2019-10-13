@@ -4,8 +4,8 @@
 <nav>
   <h1><a href="{{ url_for('index') }}">Spell Checker</a></h1>
   <ul>
-    {% if session['username'] %}
-      <li><span>Logged in as: {{ session['username'] }}</span>
+    {% if current_user %}
+      <li><span>Logged in as: {{ current_user }}</span>
       <li><a href="{{ url_for('spell_check') }}">Spell Check</a>
       <li><a href="{{ url_for('logout') }}">Log Out</a>
     {% else %}
