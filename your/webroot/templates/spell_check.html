@@ -6,11 +6,11 @@
 
 
 {% block content %}
-{% if session['username'] %}
   <form method="post">
     <label for="inputtext">Text Input</label>
     <br>
     <textarea style="width: 80%; height: 50%" name="inputtext" id="inputtext" required></textarea>
+    <input name="csrf_token" type="hidden" value="{{ csrf_token }}">
     <br>
     <input type="submit" value="Check Spelling">
   </form>
@@ -21,10 +21,5 @@
     <h4>Misspelled Words</h4>
     <p id="misspelled">{{misspelled}}</p>
   {% endif %}
-{% else %}
-  <p>You need to login in order to use this tool: <a href="login">Login</a></p>
-{% endif %}
-
-
 
 {% endblock %}
