@@ -190,7 +190,11 @@ def logout():
 
 @app.errorhandler(404)
 def page_not_found(error):
-  resp = make_response(render_template('page_not_found.html'))
+  current_user = get_jwt_identity()
+  if current_user:
+    resp = make_response(render_template('page_not_found.html', current_user=current_user))
+  else:
+    resp = make_response(render_template('page_not_found.html'))
   resp.headers['Content-Security-Policy'] = "default-src 'self'"
   resp.headers['X-Content-Type-Options'] = 'nosniff'
   resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
