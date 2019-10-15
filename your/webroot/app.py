@@ -9,6 +9,7 @@ from flask_jwt_extended import (
 import subprocess
 import time
 
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -31,10 +32,12 @@ jwt = JWTManager(app)
 
 import models
 
+
 @app.route('/')
 def index():
   # The root directory automatically redirects to login.
   return redirect(url_for('login'))
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -84,6 +87,7 @@ def login():
   resp.headers['X-XSS-Protection'] = '1; mode=block'
   return resp, 200
 
+
 @app.route('/register', methods=['POST', 'GET'])
 def register():
   if request.method == 'POST':
@@ -128,6 +132,7 @@ def register():
   resp.headers['X-XSS-Protection'] = '1; mode=block'
   return resp, 200
 
+
 @app.route('/spell_check', methods=['POST', 'GET'])
 @jwt_required
 def spell_check():
@@ -169,6 +174,7 @@ def token_refresh():
   resp.headers['X-XSS-Protection'] = '1; mode=block'
   return resp, 200
 
+
 @app.route('/logout')
 def logout():
   # remove the username from the session if it's there
@@ -187,6 +193,7 @@ def logout():
     resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
     resp.headers['X-XSS-Protection'] = '1; mode=block'
     return resp, 500
+
 
 @app.errorhandler(404)
 def page_not_found(error):

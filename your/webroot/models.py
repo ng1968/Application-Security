@@ -17,6 +17,11 @@ class UserModel(db.Model):
   def find_by_username(cls, username):
     return cls.query.filter_by(username = username).first()
 
+  @classmethod
+  def delete_user(cls, username):
+    db.session.delete(cls.query.filter_by(username = username).first())
+    db.session.commit()
+
   @staticmethod
   def generate_hash(password):
     return sha256.hash(password)
