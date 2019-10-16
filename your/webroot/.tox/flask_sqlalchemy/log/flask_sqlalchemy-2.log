@@ -1,0 +1,22 @@
+action: flask_sqlalchemy, msg: envreport
+cwd: /root/Desktop/Application-Security/your/webroot
+cmd: /root/Desktop/Application-Security/your/webroot/.tox/flask_sqlalchemy/bin/python -m pip freeze
+atomicwrites==1.3.0
+attrs==19.3.0
+Click==7.0
+Flask==1.1.1
+importlib-metadata==0.23
+itsdangerous==1.1.0
+Jinja2==2.10.3
+MarkupSafe==1.1.1
+more-itertools==7.2.0
+packaging==19.2
+pluggy==0.13.0
+py==1.8.0
+pyparsing==2.4.2
+pytest==5.2.1
+pytest-flask==0.15.0
+six==1.12.0
+wcwidth==0.1.7
+Werkzeug==0.16.0
+zipp==0.6.0
