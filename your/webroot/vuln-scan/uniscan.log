@@ -1,0 +1,502 @@
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+Scan date: 18-10-2019 23:27:26
+===================================================================================================
+| [*] http://127.0.0.1:5000/ redirected to http://127.0.0.1:5000/
+| [*] New target is: http://127.0.0.1:5000/
+===================================================================================================
+| Domain: http://127.0.0.1:5000/
+| Server: Werkzeug/0.14.1 Python/3.7.5rc1
+| IP: 127.0.0.1
+===================================================================================================
+===================================================================================================
+Scan end date: 18-10-2019 23:27:26
+
+
+
+HTML report saved in: report/127.0.0.1.html
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+Scan date: 18-10-2019 23:27:38
+===================================================================================================
+| Domain: http://127.0.0.1:5000/login/
+| Server: Werkzeug/0.14.1 Python/3.7.5rc1
+| IP: 127.0.0.1
+===================================================================================================
+===================================================================================================
+Scan end date: 18-10-2019 23:27:38
+
+
+
+HTML report saved in: report/127.0.0.1.html
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+Scan date: 18-10-2019 23:28:13
+===================================================================================================
+| Domain: http://127.0.0.1:5000/login/
+| Server: Werkzeug/0.14.1 Python/3.7.5rc1
+| IP: 127.0.0.1
+===================================================================================================
+|
+| Directory check:
+===================================================================================================
+|                                                                                                   
+| File check:
+===================================================================================================
+|
+| Check robots.txt:
+|
+| Check sitemap.xml:
+===================================================================================================
+|
+| Crawler Started:
+| Plugin name: FCKeditor upload test v.1 Loaded.
+| Plugin name: Upload Form Detect v.1.1 Loaded.
+| Plugin name: Timthumb <= 1.32 vulnerability v.1 Loaded.
+| Plugin name: Web Backdoor Disclosure v.1.1 Loaded.
+| Plugin name: Code Disclosure v.1.1 Loaded.
+| Plugin name: phpinfo() Disclosure v.1 Loaded.
+| Plugin name: External Host Detect v.1.2 Loaded.
+| Plugin name: E-mail Detection v.1.1 Loaded.
+| [+] Crawling finished, 5 URL's found!
+|
+| FCKeditor File Upload:
+|
+| File Upload Forms:
+|
+| Timthumb:
+|
+| Web Backdoors:
+|
+| Source Code Disclosure:
+|
+| PHPinfo() Disclosure:
+|
+| External hosts:
+|
+| E-mails:
+|
+| Ignored Files: 
+===================================================================================================
+| Dynamic tests:
+| Plugin name: Learning New Directories v.1.2 Loaded.
+| Plugin name: FCKedior tests v.1.1 Loaded.
+| Plugin name: Timthumb <= 1.32 vulnerability v.1 Loaded.
+| Plugin name: Find Backup Files v.1.2 Loaded.
+| Plugin name: Blind SQL-injection tests v.1.3 Loaded.
+| Plugin name: Local File Include tests v.1.1 Loaded.
+| Plugin name: PHP CGI Argument Injection v.1.1 Loaded.
+| Plugin name: Remote Command Execution tests v.1.1 Loaded.
+| Plugin name: Remote File Include tests v.1.2 Loaded.
+| Plugin name: SQL-injection tests v.1.2 Loaded.
+| Plugin name: Cross-Site Scripting tests v.1.2 Loaded.
+| Plugin name: Web Shell Finder v.1.3 Loaded.
+| [+] 0 New directories added
+|                                                                                                   
+|                                                                                                   
+| FCKeditor tests:
+|                                                                                                   
+|                                                                                                   
+| Timthumb < 1.33 vulnerability:
+|                                                                                                   
+|                                                                                                   
+| Backup Files:
+|                                                                                                   
+|                                                                                                   
+| Blind SQL Injection:
+|                                                                                                   
+|                                                                                                   
+| Local File Include:
+|                                                                                                   
+|                                                                                                   
+| PHP CGI Argument Injection:
+|                                                                                                   
+|                                                                                                   
+| Remote Command Execution:
+|                                                                                                   
+|                                                                                                   
+| Remote File Include:
+|                                                                                                   
+|                                                                                                   
+| SQL Injection:
+|                                                                                                   
+|                                                                                                   
+| Cross-Site Scripting (XSS):
+|                                                                                                   
+|                                                                                                   
+| Web Shell Finder:
+===================================================================================================
+| Static tests:
+| Plugin name: Local File Include tests v.1.1 Loaded.
+| Plugin name: Remote Command Execution tests v.1.1 Loaded.
+| Plugin name: Remote File Include tests v.1.1 Loaded.
+|                                                                                                   
+|                                                                                                   
+| Local File Include:
+|                                                                                                   
+|                                                                                                   
+| Remote Command Execution:
+|                                                                                                   
+|                                                                                                   
+| Remote File Include:
+===================================================================================================
+| Stress tests:
+| Plugin name: Mini Stress Test v.1.1 Loaded.
+|                                                                                                   
+|                                                                                                   
+| Mini Stress Test:
+| Looking for best cost:
+| Using a as target
+| Mini Stress Test End.                              
+===================================================================================================
+Scan end date: 18-10-2019 23:30:19
+
+
+
+HTML report saved in: report/127.0.0.1.html
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+Scan date: 19-10-2019 22:5:51
+===================================================================================================
+| Domain: http://127.0.0.1:5000/login/
+| Server: Werkzeug/0.14.1 Python/3.7.5rc1
+| IP: 127.0.0.1
+===================================================================================================
+|
+| Directory check:
+===================================================================================================
+|                                                                                                   
+| File check:
+===================================================================================================
+|
+| Check robots.txt:
+|
+| Check sitemap.xml:
+===================================================================================================
+|
+| Crawler Started:
+| Plugin name: FCKeditor upload test v.1 Loaded.
+| Plugin name: Upload Form Detect v.1.1 Loaded.
+| Plugin name: Timthumb <= 1.32 vulnerability v.1 Loaded.
+| Plugin name: Web Backdoor Disclosure v.1.1 Loaded.
+| Plugin name: Code Disclosure v.1.1 Loaded.
+| Plugin name: phpinfo() Disclosure v.1 Loaded.
+| Plugin name: External Host Detect v.1.2 Loaded.
+| Plugin name: E-mail Detection v.1.1 Loaded.
+| [+] Crawling finished, 5 URL's found!
+|
+| FCKeditor File Upload:
+|
+| File Upload Forms:
+|
+| Timthumb:
+|
+| Web Backdoors:
+|
+| Source Code Disclosure:
+|
+| PHPinfo() Disclosure:
+|
+| External hosts:
+|
+| E-mails:
+|
+| Ignored Files: 
+===================================================================================================
+| Dynamic tests:
+| Plugin name: Learning New Directories v.1.2 Loaded.
+| Plugin name: FCKedior tests v.1.1 Loaded.
+| Plugin name: Timthumb <= 1.32 vulnerability v.1 Loaded.
+| Plugin name: Find Backup Files v.1.2 Loaded.
+| Plugin name: Blind SQL-injection tests v.1.3 Loaded.
+| Plugin name: Local File Include tests v.1.1 Loaded.
+| Plugin name: PHP CGI Argument Injection v.1.1 Loaded.
+| Plugin name: Remote Command Execution tests v.1.1 Loaded.
+| Plugin name: Remote File Include tests v.1.2 Loaded.
+| Plugin name: SQL-injection tests v.1.2 Loaded.
+| Plugin name: Cross-Site Scripting tests v.1.2 Loaded.
+| Plugin name: Web Shell Finder v.1.3 Loaded.
+| [+] 0 New directories added
+|                                                                                                   
+|                                                                                                   
+| FCKeditor tests:
+|                                                                                                   
+|                                                                                                   
+| Timthumb < 1.33 vulnerability:
+|                                                                                                   
+|                                                                                                   
+| Backup Files:
+|                                                                                                   
+|                                                                                                   
+| Blind SQL Injection:
+|                                                                                                   
+|                                                                                                   
+| Local File Include:
+|                                                                                                   
+|                                                                                                   
+| PHP CGI Argument Injection:
+|                                                                                                   
+|                                                                                                   
+| Remote Command Execution:
+|                                                                                                   
+|                                                                                                   
+| Remote File Include:
+|                                                                                                   
+|                                                                                                   
+| SQL Injection:
+|                                                                                                   
+|                                                                                                   
+| Cross-Site Scripting (XSS):
+|                                                                                                   
+|                                                                                                   
+| Web Shell Finder:
+===================================================================================================
+| Static tests:
+| Plugin name: Local File Include tests v.1.1 Loaded.
+| Plugin name: Remote Command Execution tests v.1.1 Loaded.
+| Plugin name: Remote File Include tests v.1.1 Loaded.
+|                                                                                                   
+|                                                                                                   
+| Local File Include:
+|                                                                                                   
+|                                                                                                   
+| Remote Command Execution:
+|                                                                                                   
+|                                                                                                   
+| Remote File Include:
+===================================================================================================
+| Stress tests:
+| Plugin name: Mini Stress Test v.1.1 Loaded.
+|                                                                                                   
+|                                                                                                   
+| Mini Stress Test:
+| Looking for best cost:
+| Using a as target
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+
+
+Scan date: 20-10-2019 17:56:18
+===================================================================================================
+| Domain: http://127.0.0.1:5000/register/
+| Server: Werkzeug/0.14.1 Python/3.7.5rc1
+| IP: 127.0.0.1
+===================================================================================================
+===================================================================================================
+| Looking for Drupal plugins/modules
+| 
+| BANNER GRABBING: 
+| X-XSS-Protection: 1; mode=block
+===================================================================================================
+===================================================================================================
+| PING
+| 
+| PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+| 64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.031 ms
+| 64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.032 ms
+| 64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.039 ms
+| 64 bytes from 127.0.0.1: icmp_seq=4 ttl=64 time=0.025 ms
+| 
+| --- 127.0.0.1 ping statistics ---
+| 4 packets transmitted, 4 received, 0% packet loss, time 3061ms
+| rtt min/avg/max/mdev = 0.025/0.031/0.039/0.005 ms
+===================================================================================================
+| TRACEROUTE
+| 
+| traceroute to 127.0.0.1 (127.0.0.1), 30 hops max, 60 byte packets
+|  1  localhost (127.0.0.1)  0.018 ms  0.003 ms  0.002 ms
+===================================================================================================
+| NSLOOKUP
+| 
+| Server:		75.75.75.75
+| Address:	75.75.75.75#53
+| 
+| Non-authoritative answer:
+| 1.0.0.127.in-addr.arpa	name = localhost.
+| Authoritative answers can be found from:
+===================================================================================================
+| NMAP
+| 
+| Starting Nmap 7.80 ( https://nmap.org ) at 2019-10-20 17:56 EDT
+| NSE: Loaded 151 scripts for scanning.
+| NSE: Script Pre-scanning.
+| Initiating NSE at 17:56
+| Completed NSE at 17:56, 0.00s elapsed
+| Initiating NSE at 17:56
+| Completed NSE at 17:56, 0.00s elapsed
+| Initiating NSE at 17:56
+| Completed NSE at 17:56, 0.00s elapsed
+| Initiating SYN Stealth Scan at 17:56
+| Scanning localhost (127.0.0.1) [1000 ports]
+| Discovered open port 111/tcp on 127.0.0.1
+| Discovered open port 5000/tcp on 127.0.0.1
+| Discovered open port 5432/tcp on 127.0.0.1
+| Completed SYN Stealth Scan at 17:56, 0.04s elapsed (1000 total ports)
+| Initiating Service scan at 17:56
+| Scanning 3 services on localhost (127.0.0.1)
+| Completed Service scan at 17:56, 6.03s elapsed (3 services on 1 host)
+| Initiating OS detection (try #1) against localhost (127.0.0.1)
+| NSE: Script scanning 127.0.0.1.
+| Initiating NSE at 17:56
+===================================================================================================
+|
+| Directory check:
+===================================================================================================
+|                                                                                                   
+| File check:
+===================================================================================================
+|
+| Check robots.txt:
+|
+| Check sitemap.xml:
+===================================================================================================
+|
+| Crawler Started:
+| Plugin name: FCKeditor upload test v.1 Loaded.
+| Plugin name: Upload Form Detect v.1.1 Loaded.
+| Plugin name: Timthumb <= 1.32 vulnerability v.1 Loaded.
+| Plugin name: Web Backdoor Disclosure v.1.1 Loaded.
+| Plugin name: Code Disclosure v.1.1 Loaded.
+| Plugin name: phpinfo() Disclosure v.1 Loaded.
+| Plugin name: External Host Detect v.1.2 Loaded.
+| Plugin name: E-mail Detection v.1.1 Loaded.
+| [+] Crawling finished, 5 URL's found!
+|
+| FCKeditor File Upload:
+|
+| File Upload Forms:
+|
+| Timthumb:
+|
+| Web Backdoors:
+|
+| Source Code Disclosure:
+|
+| PHPinfo() Disclosure:
+|
+| External hosts:
+|
+| E-mails:
+|
+| Ignored Files: 
+===================================================================================================
+| Dynamic tests:
+| Plugin name: Learning New Directories v.1.2 Loaded.
+| Plugin name: FCKedior tests v.1.1 Loaded.
+| Plugin name: Timthumb <= 1.32 vulnerability v.1 Loaded.
+| Plugin name: Find Backup Files v.1.2 Loaded.
+| Plugin name: Blind SQL-injection tests v.1.3 Loaded.
+| Plugin name: Local File Include tests v.1.1 Loaded.
+| Plugin name: PHP CGI Argument Injection v.1.1 Loaded.
+| Plugin name: Remote Command Execution tests v.1.1 Loaded.
+| Plugin name: Remote File Include tests v.1.2 Loaded.
+| Plugin name: SQL-injection tests v.1.2 Loaded.
+| Plugin name: Cross-Site Scripting tests v.1.2 Loaded.
+| Plugin name: Web Shell Finder v.1.3 Loaded.
+| [+] 0 New directories added
+|                                                                                                   
+|                                                                                                   
+| FCKeditor tests:
+|                                                                                                   
+|                                                                                                   
+| Timthumb < 1.33 vulnerability:
+|                                                                                                   
+|                                                                                                   
+| Backup Files:
+|                                                                                                   
+|                                                                                                   
+| Blind SQL Injection:
+|                                                                                                   
+|                                                                                                   
+| Local File Include:
+|                                                                                                   
+|                                                                                                   
+| PHP CGI Argument Injection:
+|                                                                                                   
+|                                                                                                   
+| Remote Command Execution:
+|                                                                                                   
+|                                                                                                   
+| Remote File Include:
+|                                                                                                   
+|                                                                                                   
+| SQL Injection:
+|                                                                                                   
+|                                                                                                   
+| Cross-Site Scripting (XSS):
+|                                                                                                   
+|                                                                                                   
+| Web Shell Finder:
+===================================================================================================
+| Static tests:
+| Plugin name: Local File Include tests v.1.1 Loaded.
+| Plugin name: Remote Command Execution tests v.1.1 Loaded.
+| Plugin name: Remote File Include tests v.1.1 Loaded.
+|                                                                                                   
+|                                                                                                   
+| Local File Include:
+|                                                                                                   
+|                                                                                                   
+| Remote Command Execution:
+|                                                                                                   
+|                                                                                                   
+| Remote File Include:
+===================================================================================================
+| Stress tests:
+| Plugin name: Mini Stress Test v.1.1 Loaded.
+|                                                                                                   
+|                                                                                                   
+| Mini Stress Test:
+| Looking for best cost:
+| Using a as target
+| Mini Stress Test End.                              
+===================================================================================================
+Scan end date: 20-10-2019 17:58:38
+
+
+
+HTML report saved in: report/127.0.0.1.html

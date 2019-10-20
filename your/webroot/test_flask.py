@@ -102,7 +102,7 @@ def test_spell_check_page_access(client):
   assert b"Spell Check - Flaskr" in res.data
 
 
-def test_spell_check_page_access_input(client):
+def test_spell_check_page_double_submit(client):
   # Checks if a 401 error code is received.
   # This should be the case since they do not have a cookie yet.
   sent = {"uname" : "test",
@@ -116,8 +116,6 @@ def test_spell_check_page_access_input(client):
                   "csrf_token" : cookie}
 
   res1 = client.post("/spell_check", data=sent_to_post)
-  print(res1.data)
   
-  """res = client.post("/spell_check", data=sent_to_post)
-  assert res.status_code == 200
-  #assert b"<p id=\"textout\">test</p>" in res.data"""
+  assert res1.status_code == 401
+  assert b"CSRF double submit tokens do not match" in res1.data

@@ -1,0 +1,280 @@
+[1m[34m[*][0m Spooling to file /tmp/test.txt...
+[4mmsf5[0m [0m> spool /tmp/test.txt
+[C[C[C[C[C[C[C[C[C[C[C[C[K[Phelpwmap -h[P[Pvulnswmap_vulns -l
+[C[C[C[C[C[C[C[P[P[P[P[Pspool -h[K on /tmp/wmap.txt
+[C[C[C[C[C[C[C[C[C[C[C[C[K on /tmp/wmap.txtt
+[C[C[C[C[C[C[C[C[C[C[C[C[Kwmap_run -ett
+[C[C[C[C[C[C[Cspool /home/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txt
+t[A
+[4mmsf5[0m [0m> [C[C[C[C[C[C[P[P[P~/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txt
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[Con[K|~/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txt 
+[A[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C on[K ~/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txtlogtxt[K
+[C[C[C[C[C[C[C[C[C[C[C[C[Kwmap_run -t[Pttargets -lt http://127.0.0.1:5000/
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kt http://localhost:5000/
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl[Kh[Psites -lt[Ph
+[C[C[C[C[C[C[Chelp[Kload wmap
+[C[C[C[C[C[C[C[P[P[P[P[Phelpwmap_sites -h
+[C[C[C[C[C[C[Chelp[Kload wmap
+[C[C[C[C[C[C[C[P[P[P[P[Phelpload wmap
+[0m[1m[34m[*][0m Successfully loaded plugin: wmap
+[4mmsf5[0m [0m> load wmap
+[C[C[C[C[C[C[Cspool /tmp/test.txt
+[C[C[C[C[C[C[C[C[C[C[C[C[K[Phelpwmap -h[P[Pvulnswmap_vulns -l
+[C[C[C[C[C[C[C[P[P[P[P[Pspool -h[K on /tmp/wmap.txt
+[C[C[C[C[C[C[C[C[C[C[C[C[K on /tmp/wmap.txtt
+[C[C[C[C[C[C[C[C[C[C[C[C[Kwmap_run -ett
+[C[C[C[C[C[C[Cspool /home/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txt
+t[A
+[4mmsf5[0m [0m> [C[C[C[C[C[C[P[P[P~/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txt
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[Con[K|~/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txt 
+[A[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C on[K ~/Desktop/Application-Security/your/webroot/vuln-scan/wmap.txtlogtxt[K
+[C[C[C[C[C[C[C[C[C[C[C[C[Kwmap_run -t[Pttargets -lt http://127.0.0.1:5000/
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kt http://localhost:5000/
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl[Kh[Psites -lt[Ph
+[C[C[C[C[C[C[Chelp[Kload wmap
+[C[C[C[C[C[C[C[P[P[P[P[Phelpwmap_sites -hlt[K
+[0m[1m[34m[*][0m Available sites
+===============
+
+     Id  Host       Vhost      Port  Proto  # Pages  # Forms
+     --  ----       -----      ----  -----  -------  -------
+     0   127.0.0.1  127.0.0.1  5000  http   0        0
+
+
+[4mmsf5[0m [0m> wmap_targets -h[Kl
+[0m[1m[34m[*][0m No targets have been defined
+[4mmsf5[0m [0m> wmap_targets -l[Kt http://127.0.0.1:5000/
+[0m[4mmsf5[0m [0m> wmap_targets -t http://127.0.0.1:5000/
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl[K
+[0m[1m[34m[*][0m Defined targets
+===============
+
+     Id  Vhost      Host       Port  SSL    Path
+     --  -----      ----       ----  ---    ----
+     0   127.0.0.1  127.0.0.1  5000  false  	/
+
+
+[4mmsf5[0m [0m> wmap_run -t
+[0m[1m[34m[*][0m Testing target:
+[1m[34m[*][0m 	Site: 127.0.0.1 (127.0.0.1)
+[1m[34m[*][0m 	Port: 5000 SSL: false
+============================================================
+[1m[34m[*][0m Testing started. 2019-10-20 17:20:34 -0400
+[1m[34m[*][0m Loading wmap modules...
+[1m[34m[*][0m 39 wmap enabled modules loaded.
+[1m[34m[*][0m 
+=[ SSL testing ]=
+============================================================
+[1m[34m[*][0m Target is not SSL. SSL modules disabled.
+[1m[34m[*][0m 
+=[ Web Server testing ]=
+============================================================
+[1m[34m[*][0m Module auxiliary/scanner/http/http_version
+[1m[34m[*][0m Module auxiliary/scanner/http/open_proxy
+[1m[34m[*][0m Module auxiliary/admin/http/tomcat_administration
+[1m[34m[*][0m Module auxiliary/admin/http/tomcat_utf8_traversal
+[1m[34m[*][0m Module auxiliary/scanner/http/drupal_views_user_enum
+[1m[34m[*][0m Module auxiliary/scanner/http/frontpage_login
+[1m[34m[*][0m Module auxiliary/scanner/http/host_header_injection
+[1m[34m[*][0m Module auxiliary/scanner/http/options
+[1m[34m[*][0m Module auxiliary/scanner/http/robots_txt
+[1m[34m[*][0m Module auxiliary/scanner/http/scraper
+[1m[34m[*][0m Module auxiliary/scanner/http/svn_scanner
+[1m[34m[*][0m Module auxiliary/scanner/http/trace
+[1m[34m[*][0m Module auxiliary/scanner/http/vhost_scanner
+[1m[34m[*][0m Module auxiliary/scanner/http/webdav_internal_ip
+[1m[34m[*][0m Module auxiliary/scanner/http/webdav_scanner
+[1m[34m[*][0m Module auxiliary/scanner/http/webdav_website_content
+[1m[34m[*][0m 
+=[ File/Dir testing ]=
+============================================================
+[1m[34m[*][0m Module auxiliary/scanner/http/backup_file
+[1m[34m[*][0m Module auxiliary/scanner/http/brute_dirs
+[1m[34m[*][0m Module auxiliary/scanner/http/copy_of_file
+[1m[34m[*][0m Module auxiliary/scanner/http/dir_listing
+[1m[34m[*][0m Module auxiliary/scanner/http/dir_scanner
+[1m[34m[*][0m Module auxiliary/scanner/http/dir_webdav_unicode_bypass
+[1m[34m[*][0m Module auxiliary/scanner/http/file_same_name_dir
+[1m[34m[*][0m Module auxiliary/scanner/http/files_dir
+[1m[34m[*][0m Module auxiliary/scanner/http/http_put
+[1m[34m[*][0m Module auxiliary/scanner/http/ms09_020_webdav_unicode_bypass
+[1m[34m[*][0m Module auxiliary/scanner/http/prev_dir_same_name_file
+[1m[34m[*][0m Module auxiliary/scanner/http/replace_ext
+[1m[34m[*][0m Module auxiliary/scanner/http/soap_xml
+[1m[34m[*][0m Module auxiliary/scanner/http/trace_axd
+[1m[34m[*][0m Module auxiliary/scanner/http/verb_auth_bypass
+[1m[34m[*][0m 
+=[ Unique Query testing ]=
+============================================================
+[1m[34m[*][0m Module auxiliary/scanner/http/blind_sql_query
+[1m[34m[*][0m Module auxiliary/scanner/http/error_sql_injection
+[1m[34m[*][0m Module auxiliary/scanner/http/http_traversal
+[1m[34m[*][0m Module auxiliary/scanner/http/rails_mass_assignment
+[1m[34m[*][0m Module exploit/multi/http/lcms_php_exec
+[1m[34m[*][0m 
+=[ Query testing ]=
+============================================================
+[1m[34m[*][0m 
+=[ General testing ]=
+============================================================
+[1m[34m[*][0m Done.
+[4mmsf5[0m [0m> wmap_run -e
+[0m[1m[34m[*][0m Using ALL wmap enabled modules.
+[1m[31m[-][0m NO WMAP NODES DEFINED. Executing local modules
+[1m[34m[*][0m Testing target:
+[1m[34m[*][0m 	Site: 127.0.0.1 (127.0.0.1)
+[1m[34m[*][0m 	Port: 5000 SSL: false
+============================================================
+[1m[34m[*][0m Testing started. 2019-10-20 17:20:59 -0400
+[1m[34m[*][0m 
+=[ SSL testing ]=
+============================================================
+[1m[34m[*][0m Target is not SSL. SSL modules disabled.
+[1m[34m[*][0m 
+=[ Web Server testing ]=
+============================================================
+[1m[34m[*][0m Module auxiliary/scanner/http/http_version
+
+[1m[32m[+][0m 127.0.0.1:5000 Werkzeug/0.14.1 Python/3.7.5rc1 ( 302-http://127.0.0.1:5000/login )
+[1m[34m[*][0m Module auxiliary/scanner/http/open_proxy
+[1m[34m[*][0m Module auxiliary/admin/http/tomcat_administration
+[1m[34m[*][0m Module auxiliary/admin/http/tomcat_utf8_traversal
+[1m[34m[*][0m Attempting to connect to 127.0.0.1:5000
+[1m[32m[+][0m No File(s) found
+[1m[34m[*][0m Module auxiliary/scanner/http/drupal_views_user_enum
+[1m[31m[-][0m 127.0.0.1 does not appear to be vulnerable, will not continue
+[1m[34m[*][0m Module auxiliary/scanner/http/frontpage_login
+[1m[34m[*][0m 127.0.0.1:5000        - http://127.0.0.1:5000/ may not support FrontPage Server Extensions
+[1m[34m[*][0m Module auxiliary/scanner/http/host_header_injection
+[1m[34m[*][0m Module auxiliary/scanner/http/options
+[1m[32m[+][0m 127.0.0.1 allows GET, OPTIONS, HEAD methods
+[1m[34m[*][0m Module auxiliary/scanner/http/robots_txt
+[1m[34m[*][0m Module auxiliary/scanner/http/scraper
+[1m[32m[+][0m [127.0.0.1] / [Redirecting...]
+[1m[34m[*][0m Module auxiliary/scanner/http/svn_scanner
+[1m[34m[*][0m Using code '404' as not found.
+[1m[34m[*][0m Module auxiliary/scanner/http/trace
+[1m[34m[*][0m Module auxiliary/scanner/http/vhost_scanner
+[1m[34m[*][0m [127.0.0.1] Sending request with random domain VcYlw. 
+[1m[34m[*][0m [127.0.0.1] Sending request with random domain vBjTO. 
+[1m[34m[*][0m Module auxiliary/scanner/http/webdav_internal_ip
+[1m[34m[*][0m Module auxiliary/scanner/http/webdav_scanner
+[1m[34m[*][0m 127.0.0.1 (Werkzeug/0.14.1 Python/3.7.5rc1) WebDAV disabled.
+[1m[34m[*][0m Module auxiliary/scanner/http/webdav_website_content
+[1m[34m[*][0m 
+=[ File/Dir testing ]=
+============================================================
+[1m[34m[*][0m Module auxiliary/scanner/http/backup_file
+[1m[34m[*][0m Module auxiliary/scanner/http/brute_dirs
+[1m[34m[*][0m Path: /
+[1m[34m[*][0m Using code '404' as not found.
+[1m[34m[*][0m Module auxiliary/scanner/http/copy_of_file
+[1m[34m[*][0m Module auxiliary/scanner/http/dir_listing
+[1m[34m[*][0m Path: /
+[1m[34m[*][0m Module auxiliary/scanner/http/dir_scanner
+[1m[34m[*][0m Path: /
+[1m[34m[*][0m Detecting error code
+[1m[34m[*][0m Using code '404' as not found for 127.0.0.1
+[1m[34m[*][0m Module auxiliary/scanner/http/dir_webdav_unicode_bypass
+[1m[34m[*][0m Path: /
+[1m[34m[*][0m Using code '404' as not found.
+[1m[34m[*][0m Module auxiliary/scanner/http/file_same_name_dir
+[1m[34m[*][0m Path: /
+[1m[31m[-][0m Blank or default PATH set.
+[1m[34m[*][0m Module auxiliary/scanner/http/files_dir
+[1m[34m[*][0m Path: /
+[1m[34m[*][0m Using code '404' as not found for files with extension .null
+[1m[34m[*][0m Using code '404' as not found for files with extension .backup
+[1m[34m[*][0m Using code '404' as not found for files with extension .bak
+[1m[34m[*][0m Using code '404' as not found for files with extension .c
+[1m[34m[*][0m Using code '404' as not found for files with extension .cfg
+[1m[34m[*][0m Using code '404' as not found for files with extension .class
+[1m[34m[*][0m Using code '404' as not found for files with extension .copy
+[1m[34m[*][0m Using code '404' as not found for files with extension .conf
+[1m[34m[*][0m Using code '404' as not found for files with extension .exe
+[1m[34m[*][0m Using code '404' as not found for files with extension .html
+[1m[34m[*][0m Using code '404' as not found for files with extension .htm
+[1m[34m[*][0m Using code '404' as not found for files with extension .ini
+[1m[34m[*][0m Using code '404' as not found for files with extension .log
+[1m[34m[*][0m Using code '404' as not found for files with extension .old
+[1m[34m[*][0m Using code '404' as not found for files with extension .orig
+[1m[34m[*][0m Using code '404' as not found for files with extension .php
+[1m[34m[*][0m Using code '404' as not found for files with extension .tar
+[1m[34m[*][0m Using code '404' as not found for files with extension .tar.gz
+[1m[34m[*][0m Using code '404' as not found for files with extension .tgz
+[1m[34m[*][0m Using code '404' as not found for files with extension .tmp
+[1m[34m[*][0m Using code '404' as not found for files with extension .temp
+[1m[34m[*][0m Using code '404' as not found for files with extension .txt
+[1m[34m[*][0m Using code '404' as not found for files with extension .zip
+[1m[34m[*][0m Using code '404' as not found for files with extension ~
+[1m[34m[*][0m Using code '404' as not found for files with extension 
+[1m[32m[+][0m Found http://127.0.0.1:5000/login 200
+[1m[32m[+][0m Found http://127.0.0.1:5000/logout 200
+[1m[32m[+][0m Found http://127.0.0.1:5000/register 200
+[1m[34m[*][0m Using code '404' as not found for files with extension 
+[1m[32m[+][0m Found http://127.0.0.1:5000/login 200
+[1m[32m[+][0m Found http://127.0.0.1:5000/logout 200
+[1m[32m[+][0m Found http://127.0.0.1:5000/register 200
+[1m[34m[*][0m Module auxiliary/scanner/http/http_put
+[1m[34m[*][0m Path: /
+[1m[31m[-][0m 127.0.0.1: File doesn't seem to exist. The upload probably failed
+[1m[34m[*][0m Module auxiliary/scanner/http/ms09_020_webdav_unicode_bypass
+[1m[34m[*][0m Path: /
+[1m[31m[-][0m 127.0.0.1:5000 Folder does not require authentication. [405]
+[1m[34m[*][0m Module auxiliary/scanner/http/prev_dir_same_name_file
+[1m[34m[*][0m Path: /
+[1m[31m[-][0m Blank or default PATH set.
+[1m[34m[*][0m Module auxiliary/scanner/http/replace_ext
+[1m[34m[*][0m Module auxiliary/scanner/http/soap_xml
+[1m[34m[*][0m Path: /
+[1m[34m[*][0m Starting scan with 0ms delay between requests
+[1m[34m[*][0m Server 127.0.0.1:5000 returned HTTP 404 for /.  Use a different one.
+[1m[34m[*][0m Module auxiliary/scanner/http/trace_axd
+[1m[34m[*][0m Path: /
+[1m[34m[*][0m Module auxiliary/scanner/http/verb_auth_bypass
+[1m[34m[*][0m 
+=[ Unique Query testing ]=
+============================================================
+[1m[34m[*][0m Module auxiliary/scanner/http/blind_sql_query
+[1m[34m[*][0m Module auxiliary/scanner/http/error_sql_injection
+[1m[34m[*][0m Module auxiliary/scanner/http/http_traversal
+[1m[34m[*][0m Module auxiliary/scanner/http/rails_mass_assignment
+[1m[34m[*][0m Module exploit/multi/http/lcms_php_exec
+[1m[34m[*][0m 
+=[ Query testing ]=
+============================================================
+[1m[34m[*][0m 
+=[ General testing ]=
+============================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Launch completed in 134.15358686447144 seconds.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[1m[34m[*][0m Done.
+[4mmsf5[0m [0m> 
+[K[4mmsf5[0m [0m> [H[2J[4mmsf5[0m [0m> wmap_vulns-[K -l
+[0m[1m[34m[*][0m + [127.0.0.1] (127.0.0.1): scraper /
+[1m[34m[*][0m 	scraper Scraper
+[1m[34m[*][0m 	GET Redirecting...
+[1m[34m[*][0m + [127.0.0.1] (127.0.0.1): file /console
+[1m[34m[*][0m 	file File found.
+[1m[34m[*][0m 	GET Res code: 200
+[1m[34m[*][0m + [127.0.0.1] (127.0.0.1): file /login
+[1m[34m[*][0m 	file File found.
+[1m[34m[*][0m 	GET Res code: 200
+[1m[34m[*][0m + [127.0.0.1] (127.0.0.1): file /logout
+[1m[34m[*][0m 	file File found.
+[1m[34m[*][0m 	GET Res code: 200
+[1m[34m[*][0m + [127.0.0.1] (127.0.0.1): file /register
+[1m[34m[*][0m 	file File found.
+[1m[34m[*][0m 	GET Res code: 200
+[4mmsf5[0m [0m> vulns
+[0m
+Vulnerabilities
+===============
+
+Timestamp  Host  Name  References
+---------  ----  ----  ----------
