@@ -29,3 +29,44 @@ class UserModel(db.Model):
   @staticmethod
   def verify_hash(password, hash):
     return sha256.verify(password, hash)
+
+class SpellHistoryModel(db.Model):
+  __tablename__ = 'spellcheckhistory'
+
+  queryid = db.Column(db.Integer, primary_key = True)
+  username = db.Column(db.String(120), nullable = False)
+  querytext = db.Column(db.String(1000), nullable = False)
+  queryresults = db.Column(db.String(1000), nullable = False)
+  
+  def save_to_db(self):
+    db.session.add(self)
+    db.session.commit()
+  
+  @classmethod
+  def find_results_by_username(cls, username):
+    return cls.query.filter_by(username = username).with_entities(SpellHistoryModel.queryid,  
+      SpellHistoryModel.querytext,
+      SpellHistoryModel.queryresults).all()
+
+
+# class LoggingModel(db.Model):
+#   __tablename__ = 'logging'
+
+#   id = db.Column(db.Integer, primary_key = True)
+#   username = db.Column(db.String(120), unique = True, nullable = False)
+#   login = db.Column(db.String(120), nullable = False)
+#   ip = db.Column(db.String(120), nullable = False)
+#   timestamp = db.Column(db.String(120), nullable = False)
+  
+#   def save_to_db(self):
+#     db.session.add(self)
+#     db.session.commit()
+  
+#   @classmethod
+#   def find_by_username(cls, username):
+#     return cls.query.filter_by(username = username).first()
+
+#   @classmethod
+#   def delete_user(cls, username):
+#     db.session.delete(cls.query.filter_by(username = username).first())
+#     db.session.commit()

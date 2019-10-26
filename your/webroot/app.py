@@ -22,7 +22,7 @@ def create_tables():
   db.create_all()
 
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
-app.config['JWT_ACCESS_COOKIE_PATH'] = '/spell_check'
+app.config['JWT_ACCESS_COOKIE_PATH'] = ['/spell_check', '/history']
 app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
 app.config['JWT_COOKIE_CSRF_PROTECT'] = True
 app.config['JWT_CSRF_CHECK_FORM'] = True
@@ -32,6 +32,11 @@ jwt = JWTManager(app)
 
 import models
 
+def add_headers(resp):
+  resp.headers['Content-Security-Policy'] = "default-src 'self'"
+  resp.headers['X-Content-Type-Options'] = 'nosniff'
+  resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
+  resp.headers['X-XSS-Protection'] = '1; mode=block'
 
 @app.route('/')
 def index():
@@ -46,10 +51,7 @@ def login():
 
     if not current_user:
       resp = make_response(render_template('login.html', login_output='incorrect'))
-      resp.headers['Content-Security-Policy'] = "default-src 'self'"
-      resp.headers['X-Content-Type-Options'] = 'nosniff'
-      resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-      resp.headers['X-XSS-Protection'] = '1; mode=block'
+      add_headers(resp)
       return resp, 401
     
     if models.UserModel.verify_hash(request.form['pword'], current_user.password):
@@ -59,32 +61,20 @@ def login():
         resp = make_response(render_template('login.html', current_user=current_user.username, login_output='success'))
         set_access_cookies(resp, access_token)
         set_refresh_cookies(resp, refresh_token)
-        resp.headers['Content-Security-Policy'] = "default-src 'self'"
-        resp.headers['X-Content-Type-Options'] = 'nosniff'
-        resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-        resp.headers['X-XSS-Protection'] = '1; mode=block'
+        add_headers(resp)
         return  resp, 200
       else:
         resp = make_response(render_template('login.html', login_output='failure: two-factor wrong'))
-        resp.headers['Content-Security-Policy'] = "default-src 'self'"
-        resp.headers['X-Content-Type-Options'] = 'nosniff'
-        resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-        resp.headers['X-XSS-Protection'] = '1; mode=block'
+        add_headers(resp)
         return resp, 401
     else:
       resp = make_response(render_template('login.html', login_output='incorrect'))
-      resp.headers['Content-Security-Policy'] = "default-src 'self'"
-      resp.headers['X-Content-Type-Options'] = 'nosniff'
-      resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-      resp.headers['X-XSS-Protection'] = '1; mode=block'
+      add_headers(resp)
       return  resp, 401
 
   # was GET
   resp = make_response(render_template('login.html'))
-  resp.headers['Content-Security-Policy'] = "default-src 'self'"
-  resp.headers['X-Content-Type-Options'] = 'nosniff'
-  resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-  resp.headers['X-XSS-Protection'] = '1; mode=block'
+  add_headers(resp)
   return resp, 200
 
 
@@ -94,10 +84,7 @@ def register():
     # Checks if the username is already in the database.
     if models.UserModel.find_by_username(request.form['uname']):
       resp = make_response(render_template('register.html', register_output='Failure! Username already exists, try again'))
-      resp.headers['Content-Security-Policy'] = "default-src 'self'"
-      resp.headers['X-Content-Type-Options'] = 'nosniff'
-      resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-      resp.headers['X-XSS-Protection'] = '1; mode=block'
+      add_headers(resp)
       return resp, 401
     
     new_user = models.UserModel(
@@ -111,25 +98,16 @@ def register():
       access_token = create_access_token(identity = request.form['uname'])
       refresh_token = create_refresh_token(identity = request.form['uname'])
       resp = make_response(render_template('register.html', register_output='Account registered Success!'))
-      resp.headers['Content-Security-Policy'] = "default-src 'self'"
-      resp.headers['X-Content-Type-Options'] = 'nosniff'
-      resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-      resp.headers['X-XSS-Protection'] = '1; mode=block'
+      add_headers(resp)
       return resp, 200
     except:
       resp = make_response(render_template('register.html', register_output='Something went wrong!'))
-      resp.headers['Content-Security-Policy'] = "default-src 'self'"
-      resp.headers['X-Content-Type-Options'] = 'nosniff'
-      resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-      resp.headers['X-XSS-Protection'] = '1; mode=block'
+      add_headers(resp)
       return resp, 500
 
   # was GET
   resp = make_response(render_template('register.html'))
-  resp.headers['Content-Security-Policy'] = "default-src 'self'"
-  resp.headers['X-Content-Type-Options'] = 'nosniff'
-  resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-  resp.headers['X-XSS-Protection'] = '1; mode=block'
+  add_headers(resp)
   return resp, 200
 
 
@@ -145,21 +123,50 @@ def spell_check():
     output = subprocess.run(command, stdout=subprocess.PIPE)
     subprocess.run(['rm', filename], stdout=subprocess.PIPE)
     current_user = get_jwt_identity()
+    # Adding query to history
+    new_query = models.SpellHistoryModel(
+      username = current_user,
+      querytext = request.form['inputtext'],
+      queryresults = output.stdout.decode('utf-8')
+    )
+    try:
+      new_query.save_to_db()
+    except:
+      resp = make_response(render_template('spell_check.html', textout='Something went wrong!'))
+      add_headers(resp)
+      return resp, 500
+
     resp = make_response(render_template('spell_check.html', textout=request.form['inputtext'], current_user=current_user, csrf_token=(get_raw_jwt() or {}).get("csrf"), misspelled=output.stdout.decode('utf-8')))
-    resp.headers['Content-Security-Policy'] = "default-src 'self'"
-    resp.headers['X-Content-Type-Options'] = 'nosniff'
-    resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    resp.headers['X-XSS-Protection'] = '1; mode=block'
+    add_headers(resp)
     return resp, 200
 
   current_user = get_jwt_identity()
   resp = make_response(render_template('spell_check.html', current_user=current_user, csrf_token=(get_raw_jwt() or {}).get("csrf")))
-  resp.headers['Content-Security-Policy'] = "default-src 'self'"
-  resp.headers['X-Content-Type-Options'] = 'nosniff'
-  resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-  resp.headers['X-XSS-Protection'] = '1; mode=block'
+  add_headers(resp)
   return resp, 200
 
+
+@app.route('/history', methods=['POST', 'GET'])
+@jwt_required
+def history():
+  if request.method == 'POST':
+    # current_user = get_jwt_identity()
+    resp = make_response(render_template('history.html', textout=request.form['inputtext'], current_user=current_user, csrf_token=(get_raw_jwt() or {}).get("csrf"), misspelled=output.stdout.decode('utf-8')))
+    # add_headers(resp)
+    return resp, 200
+
+  current_user = get_jwt_identity()
+  query = models.SpellHistoryModel.find_results_by_username(current_user)
+  resp = make_response(
+    render_template('history.html', 
+      current_user=current_user,
+      numqueries=len(query),
+      output = query,
+      csrf_token=(get_raw_jwt() or {}).get("csrf")
+      )
+    )
+  add_headers(resp)
+  return resp, 200
 
 @app.route('/token/refresh', methods=['POST', 'GET'])
 @jwt_refresh_token_required
@@ -168,10 +175,7 @@ def token_refresh():
   access_token = create_access_token(identity = current_user)
   resp = make_response(render_template('login.html', login_output='success'))
   set_refresh_cookies(resp, refresh_token)
-  resp.headers['Content-Security-Policy'] = "default-src 'self'"
-  resp.headers['X-Content-Type-Options'] = 'nosniff'
-  resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-  resp.headers['X-XSS-Protection'] = '1; mode=block'
+  add_headers(resp)
   return resp, 200
 
 
@@ -181,17 +185,11 @@ def logout():
   try:
     resp = make_response(render_template('login.html', login_output='success'))
     unset_jwt_cookies(resp)
-    resp.headers['Content-Security-Policy'] = "default-src 'self'"
-    resp.headers['X-Content-Type-Options'] = 'nosniff'
-    resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    resp.headers['X-XSS-Protection'] = '1; mode=block'
+    add_headers(resp)
     return redirect(url_for('login')), 200
   except:
     resp = make_response(render_template(error='Something went wrong'))
-    resp.headers['Content-Security-Policy'] = "default-src 'self'"
-    resp.headers['X-Content-Type-Options'] = 'nosniff'
-    resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    resp.headers['X-XSS-Protection'] = '1; mode=block'
+    add_headers(resp)
     return resp, 500
 
 
@@ -200,10 +198,8 @@ def page_not_found(error):
   current_user = get_jwt_identity()
   if current_user:
     resp = make_response(render_template('page_not_found.html', current_user=current_user))
+    add_headers(resp)
   else:
     resp = make_response(render_template('page_not_found.html'))
-  resp.headers['Content-Security-Policy'] = "default-src 'self'"
-  resp.headers['X-Content-Type-Options'] = 'nosniff'
-  resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-  resp.headers['X-XSS-Protection'] = '1; mode=block'
+    add_headers(resp)
   return resp, 404
