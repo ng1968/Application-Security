@@ -1,7 +1,7 @@
 from flask import Flask, make_response, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
+    JWTManager, jwt_required, jwt_optional, create_access_token,
     jwt_refresh_token_required, create_refresh_token,
     get_jwt_identity, set_access_cookies,
     set_refresh_cookies, unset_jwt_cookies, get_raw_jwt
@@ -22,7 +22,7 @@ def create_tables():
   db.create_all()
 
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
-app.config['JWT_ACCESS_COOKIE_PATH'] = ['/spell_check', '/history']
+app.config['JWT_ACCESS_COOKIE_PATH'] = ['/login', '/register', '/spell_check', '/history', '/logout']
 app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
 app.config['JWT_COOKIE_CSRF_PROTECT'] = True
 app.config['JWT_CSRF_CHECK_FORM'] = True
@@ -38,6 +38,22 @@ def add_headers(resp):
   resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
   resp.headers['X-XSS-Protection'] = '1; mode=block'
 
+def add_to_logs(username_input, log_type_input, message_input, ip_input):
+  new_user = models.LoggingModel(
+    username = username_input,
+    log_type = log_type_input,
+    message = message_input,
+    ip = ip_input,
+    timestamp = str(time.time())
+  )
+  try:
+    new_user.save_to_db()
+    return 200
+  except:
+    resp = make_response(render_template('login.html', login_output='something went wrong'))
+    return resp, 500
+
+
 @app.route('/')
 def index():
   # The root directory automatically redirects to login.
@@ -45,6 +61,7 @@ def index():
 
 
 @app.route('/login', methods=['POST', 'GET'])
+@jwt_optional
 def login():
   if request.method == 'POST':
     current_user = models.UserModel.find_by_username(request.form['uname'])
@@ -52,6 +69,10 @@ def login():
     if not current_user:
       resp = make_response(render_template('login.html', login_output='incorrect'))
       add_headers(resp)
+      add_to_logs(request.form['uname'], 
+        'login', 
+        'incorrect: username not found', 
+        request.remote_addr)
       return resp, 401
     
     if models.UserModel.verify_hash(request.form['pword'], current_user.password):
@@ -62,23 +83,37 @@ def login():
         set_access_cookies(resp, access_token)
         set_refresh_cookies(resp, refresh_token)
         add_headers(resp)
+        add_to_logs(request.form['uname'], 
+          'login', 
+          'success', 
+          request.remote_addr)
         return  resp, 200
       else:
         resp = make_response(render_template('login.html', login_output='failure: two-factor wrong'))
         add_headers(resp)
+        add_to_logs(request.form['uname'], 
+          'login', 
+          'failure: two-factor wrong', 
+          request.remote_addr)
         return resp, 401
     else:
       resp = make_response(render_template('login.html', login_output='incorrect'))
       add_headers(resp)
+      add_to_logs(request.form['uname'], 
+        'login', 
+        'incorrect: wrong password', 
+        request.remote_addr)
       return  resp, 401
 
   # was GET
-  resp = make_response(render_template('login.html'))
+  current_user = get_jwt_identity()
+  resp = make_response(render_template('login.html', current_user=current_user))
   add_headers(resp)
   return resp, 200
 
 
 @app.route('/register', methods=['POST', 'GET'])
+@jwt_optional
 def register():
   if request.method == 'POST':
     # Checks if the username is already in the database.
@@ -106,7 +141,8 @@ def register():
       return resp, 500
 
   # was GET
-  resp = make_response(render_template('register.html'))
+  current_user = get_jwt_identity()
+  resp = make_response(render_template('register.html', current_user=current_user))
   add_headers(resp)
   return resp, 200
 
@@ -168,32 +204,47 @@ def history():
   add_headers(resp)
   return resp, 200
 
+
 @app.route('/token/refresh', methods=['POST', 'GET'])
 @jwt_refresh_token_required
 def token_refresh():
   current_user = get_jwt_identity()
   access_token = create_access_token(identity = current_user)
   resp = make_response(render_template('login.html', login_output='success'))
-  set_refresh_cookies(resp, refresh_token)
+  set_access_cookies(resp, access_token)
   add_headers(resp)
+  add_to_logs(current_user, 
+    'token refresh', 
+    'account refresh success', 
+    request.remote_addr)
   return resp, 200
 
 
 @app.route('/logout')
+@jwt_required
 def logout():
   # remove the username from the session if it's there
   try:
-    resp = make_response(render_template('login.html', login_output='success'))
+    resp = make_response(render_template('logout.html', login_output='success'))
+    add_to_logs(get_jwt_identity(), 
+      'logout', 
+      'account log out success', 
+      request.remote_addr)
     unset_jwt_cookies(resp)
     add_headers(resp)
-    return redirect(url_for('login')), 200
+    return resp, 200
   except:
-    resp = make_response(render_template(error='Something went wrong'))
+    resp = make_response(render_template(login_output='Something went wrong'))
     add_headers(resp)
+    add_to_logs(get_jwt_identity(), 
+      'logout', 
+      'something went wrong', 
+      request.remote_addr)
     return resp, 500
 
 
 @app.errorhandler(404)
+@jwt_optional
 def page_not_found(error):
   current_user = get_jwt_identity()
   if current_user:

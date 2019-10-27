@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Login History{% endblock %}</h1>
+{% endblock %}
+
+
+{% block content %}
+
+<table style="width:70%">
+  <tr>
+    <th>Username</th>
+    <th>Query Text</th>
+    <th>Query Results</th>
+  </tr>
+  {% for row in output %}
+  <tr>
+    <td id="queryid">{{row[0]}}</td>
+    <td id="querytext">{{row[1]}}</td>
+    <td id="queryresults">{{row[2]}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
