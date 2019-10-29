@@ -6,19 +6,53 @@
 
 
 {% block content %}
+  <form method="post">
+    <label for="userid">User ID</label>
+    <input name="userid" id="userid" required>
+    <input name="csrf_token" type="hidden" value="{{ csrf_token }}">
+    <br>
+    <input type="submit" value="Search">
+  </form>
 
-<table style="width:70%">
-  <tr>
-    <th>Username</th>
-    <th>Query Text</th>
-    <th>Query Results</th>
-  </tr>
-  {% for row in output %}
-  <tr>
-    <td id="queryid">{{row[0]}}</td>
-    <td id="querytext">{{row[1]}}</td>
-    <td id="queryresults">{{row[2]}}</td>
-  </tr>
-  {% endfor %}
-</table>
+  <p>{{error}}</p>
+  {% if output %}
+  <table style="width:10%; float: left;">
+    <tr>
+      <th>User ID</th>
+      <th>Username</th>
+    </tr>
+    {% for user_id, username in output %}
+    <tr>
+      <td id="user id">{{user_id}}</td>
+      <td id="username">{{username}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  {% if logging_output %}
+    <p>Logging information for: {{logging_username}}</p>
+    <table style="width:60%">
+    <tr>
+      <th>Log ID</th>
+      <th>User ID</th>
+      <th>Username</th>
+      <th>Log Type</th>
+      <th>Message</th>
+      <th>IP</th>
+      <th>Timestamp</th>
+    </tr>
+    {% for log_id, user_id, username, log_type, message, ip, timestamp in logging_output %}
+      <tr>
+        <td id="log_id">{{log_id}}</td>
+        <td id="user_id">{{user_id}}</td>
+        <td id="username">{{username}}</td>
+        <td id="log_type">{{log_type}}</td>
+        <td id="message">{{message}}</td>
+        <td id="ip">{{ip}}</td>
+        <td id="logout#{{log_id}}time">{{timestamp}}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  {% endif %}
 {% endblock %}

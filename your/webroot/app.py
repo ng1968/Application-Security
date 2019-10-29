@@ -40,6 +40,7 @@ def add_headers(resp):
 
 def add_to_logs(username_input, log_type_input, message_input, ip_input):
   new_user = models.LoggingModel(
+    user_id=models.UserModel.id_from_username(username_input)[0],
     username = username_input,
     log_type = log_type_input,
     message = message_input,
@@ -161,6 +162,7 @@ def spell_check():
     current_user = get_jwt_identity()
     # Adding query to history
     new_query = models.SpellHistoryModel(
+      user_id=models.UserModel.id_from_username(current_user)[0],
       username = current_user,
       querytext = request.form['inputtext'],
       queryresults = output.stdout.decode('utf-8')
@@ -172,7 +174,11 @@ def spell_check():
       add_headers(resp)
       return resp, 500
 
-    resp = make_response(render_template('spell_check.html', textout=request.form['inputtext'], current_user=current_user, csrf_token=(get_raw_jwt() or {}).get("csrf"), misspelled=output.stdout.decode('utf-8')))
+    resp = make_response(render_template('spell_check.html', 
+      textout=request.form['inputtext'], 
+      current_user=current_user, 
+      csrf_token=(get_raw_jwt() or {}).get("csrf"), 
+      misspelled=output.stdout.decode('utf-8')))
     add_headers(resp)
     return resp, 200
 
@@ -220,7 +226,7 @@ def token_refresh():
   return resp, 200
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST', 'GET'])
 @jwt_required
 def logout():
   # remove the username from the session if it's there
@@ -234,13 +240,68 @@ def logout():
     add_headers(resp)
     return resp, 200
   except:
-    resp = make_response(render_template(login_output='Something went wrong'))
+    resp = make_response(render_template('logout.html', login_output='Something went wrong'))
     add_headers(resp)
     add_to_logs(get_jwt_identity(), 
       'logout', 
       'something went wrong', 
       request.remote_addr)
     return resp, 500
+
+
+@app.route('/login_history', methods=['POST', 'GET'])
+@jwt_required
+def login_history():
+  users = models.UserModel.id_username()
+  current_user = get_jwt_identity()
+  # POST
+  if request.method == 'POST':
+    if current_user == 'admin':
+      userid = request.form['userid']
+      query = models.LoggingModel.find_results_by_user_id(userid)
+      resp = make_response(
+        render_template('login_history.html', 
+          current_user=current_user,
+          output=users,
+          logging_output=query,
+          csrf_token=(get_raw_jwt() or {}).get("csrf")
+          )
+        )
+      add_headers(resp)
+      return resp, 200
+    else:
+      resp = make_response(
+        render_template('login_history.html', 
+          current_user=current_user,
+          error='Sorry you do not have access',
+          csrf_token=(get_raw_jwt() or {}).get("csrf")
+          )
+        )
+      add_headers(resp)
+      return resp, 401
+
+  # GET
+  if current_user == 'admin':
+    resp = make_response(
+      render_template('login_history.html', 
+        current_user=current_user,
+        output=users,
+        csrf_token=(get_raw_jwt() or {}).get("csrf")
+        )
+      )
+    add_headers(resp)
+    return resp, 200
+  else:
+    resp = make_response(
+      render_template('login_history.html', 
+        current_user=current_user,
+        error='Sorry you do not have access',
+        csrf_token=(get_raw_jwt() or {}).get("csrf")
+        )
+      )
+    add_headers(resp)
+    return resp, 401
+
 
 
 @app.errorhandler(404)
