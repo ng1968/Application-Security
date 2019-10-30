@@ -84,3 +84,18 @@ class LoggingModel(db.Model):
       LoggingModel.message,
       LoggingModel.ip,
       LoggingModel.timestamp).all()
+
+  @classmethod
+  def find_logout_to_update(cls, username):
+    log_id_to_update = cls.query.filter_by(username = username,
+                                           log_type = 'logout',
+                                           timestamp = 'N/A.').first()
+    return log_id_to_update
+
+  @classmethod
+  def update_logout(cls, username, message, logout_time):
+    log_id_to_update = LoggingModel.find_logout_to_update(username)
+    if log_id_to_update:
+      log_id_to_update.message = message
+      log_id_to_update.timestamp = logout_time
+      db.session.commit()

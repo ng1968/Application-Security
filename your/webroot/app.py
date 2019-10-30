@@ -38,17 +38,29 @@ def add_headers(resp):
   resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
   resp.headers['X-XSS-Protection'] = '1; mode=block'
 
-def add_to_logs(username_input, log_type_input, message_input, ip_input):
-  new_user = models.LoggingModel(
+
+def add_login_to_db(username_input, message_input, ip_input):
+  login = models.LoggingModel(
     user_id=models.UserModel.id_from_username(username_input)[0],
     username = username_input,
-    log_type = log_type_input,
+    log_type = 'login',
     message = message_input,
     ip = ip_input,
     timestamp = str(time.time())
   )
-  try:
-    new_user.save_to_db()
+
+  try:    
+    login.save_to_db()
+    if message_input == 'success':
+      logout = models.LoggingModel(
+        user_id=models.UserModel.id_from_username(username_input)[0],
+        username = username_input,
+        log_type = 'logout',
+        message = 'Not Logged Out Yet.',
+        ip = ip_input,
+        timestamp = 'N/A.'
+      )
+      logout.save_to_db()
     return 200
   except:
     resp = make_response(render_template('login.html', login_output='something went wrong'))
@@ -70,8 +82,7 @@ def login():
     if not current_user:
       resp = make_response(render_template('login.html', login_output='incorrect'))
       add_headers(resp)
-      add_to_logs(request.form['uname'], 
-        'login', 
+      add_login_to_db(request.form['uname'], 
         'incorrect: username not found', 
         request.remote_addr)
       return resp, 401
@@ -84,24 +95,21 @@ def login():
         set_access_cookies(resp, access_token)
         set_refresh_cookies(resp, refresh_token)
         add_headers(resp)
-        add_to_logs(request.form['uname'], 
-          'login', 
+        add_login_to_db(request.form['uname'], 
           'success', 
           request.remote_addr)
         return  resp, 200
       else:
         resp = make_response(render_template('login.html', login_output='failure: two-factor wrong'))
         add_headers(resp)
-        add_to_logs(request.form['uname'], 
-          'login', 
+        add_login_to_db(request.form['uname'], 
           'failure: two-factor wrong', 
           request.remote_addr)
         return resp, 401
     else:
       resp = make_response(render_template('login.html', login_output='incorrect'))
       add_headers(resp)
-      add_to_logs(request.form['uname'], 
-        'login', 
+      add_login_to_db(request.form['uname'], 
         'incorrect: wrong password', 
         request.remote_addr)
       return  resp, 401
@@ -219,8 +227,7 @@ def token_refresh():
   resp = make_response(render_template('login.html', login_output='success'))
   set_access_cookies(resp, access_token)
   add_headers(resp)
-  add_to_logs(current_user, 
-    'token refresh', 
+  add_login_to_db(current_user, 
     'account refresh success', 
     request.remote_addr)
   return resp, 200
@@ -229,23 +236,20 @@ def token_refresh():
 @app.route('/logout', methods=['POST', 'GET'])
 @jwt_required
 def logout():
+  current_user = get_jwt_identity()
   # remove the username from the session if it's there
   try:
     resp = make_response(render_template('logout.html', login_output='success'))
-    add_to_logs(get_jwt_identity(), 
-      'logout', 
-      'account log out success', 
-      request.remote_addr)
+    # Update logout
+    models.LoggingModel.update_logout(current_user, 'success', str(time.time()))
     unset_jwt_cookies(resp)
     add_headers(resp)
     return resp, 200
   except:
     resp = make_response(render_template('logout.html', login_output='Something went wrong'))
     add_headers(resp)
-    add_to_logs(get_jwt_identity(), 
-      'logout', 
-      'something went wrong', 
-      request.remote_addr)
+    # Update logout
+    models.LoggingModel.update_logout(current_user, 'Something Went Wrong', str(time.time()))
     return resp, 500
 
 
