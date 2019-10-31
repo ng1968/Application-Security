@@ -55,8 +55,16 @@ class SpellHistoryModel(db.Model):
   @classmethod
   def find_results_by_username(cls, username):
     return cls.query.filter_by(username = username).with_entities(SpellHistoryModel.queryid,  
+      SpellHistoryModel.username,
       SpellHistoryModel.querytext,
       SpellHistoryModel.queryresults).all()
+
+  @classmethod
+  def find_results_by_queryid(cls, queryid):
+    return cls.query.filter_by(queryid = queryid).with_entities(SpellHistoryModel.queryid,  
+      SpellHistoryModel.username,
+      SpellHistoryModel.querytext,
+      SpellHistoryModel.queryresults).first()
 
 
 class LoggingModel(db.Model):

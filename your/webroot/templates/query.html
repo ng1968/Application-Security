@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}History{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<p>{{error}}</p>
+
+<table style="width:70%">
+  <tr>
+    <th>Query ID</th>
+    <th>Username</th>
+    <th>Query Text</th>
+    <th>Query Results</th>
+  </tr>
+  {% if query_output %}
+  <tr>
+    <td id="queryid">{{query_output[0]}}</td>
+    <td id="username">{{query_output[1]}}</td>
+    <td id="querytext">{{query_output[2]}}</td>
+    <td id="queryresults">{{query_output[3]}}</td>
+  </tr>
+  {% endif %}
+</table>
+{% endblock %}

@@ -4,20 +4,32 @@
   <h1>{% block title %}History{% endblock %}</h1>
 {% endblock %}
 
-
 {% block content %}
+<p>{{error}}</p>
+{% if admin_user %}
+  <form method="post">
+    <label for="userquery">Username</label>
+    <input name="userquery" id="userquery" required>
+    <input name="csrf_token" type="hidden" value="{{ csrf_token }}">
+    <br>
+    <input type="submit" value="Search">
+  </form>
+{% endif %}
+
 <p id="numqueries">There are a total of {{numqueries}} spell checks done.</p>
 <table style="width:70%">
   <tr>
     <th>Query ID</th>
+    <th>Username</th>
     <th>Query Text</th>
     <th>Query Results</th>
   </tr>
-  {% for row in output %}
+  {% for query_id, username, querytext, queryresults in query_output %}
   <tr>
-    <td id="queryid">{{row[0]}}</td>
-    <td id="querytext">{{row[1]}}</td>
-    <td id="queryresults">{{row[2]}}</td>
+    <td id="queryid"><a href="history/query{{query_id}}">{{query_id}}</a></td>
+    <td id="username">{{username}}</td>
+    <td id="querytext">{{querytext}}</td>
+    <td id="queryresults">{{queryresults}}</td>
   </tr>
   {% endfor %}
 </table>

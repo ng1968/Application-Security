@@ -199,25 +199,82 @@ def spell_check():
 @app.route('/history', methods=['POST', 'GET'])
 @jwt_required
 def history():
+  current_user = get_jwt_identity()
   if request.method == 'POST':
-    # current_user = get_jwt_identity()
-    resp = make_response(render_template('history.html', textout=request.form['inputtext'], current_user=current_user, csrf_token=(get_raw_jwt() or {}).get("csrf"), misspelled=output.stdout.decode('utf-8')))
-    # add_headers(resp)
+    query = models.SpellHistoryModel.find_results_by_username(request.form['userquery'])
+    resp = make_response(
+      render_template('history.html', 
+        current_user=current_user,
+        admin_user=True,
+        numqueries=len(query),
+        query_output = query,
+        csrf_token=(get_raw_jwt() or {}).get("csrf")
+        )
+      )
+    add_headers(resp)
     return resp, 200
 
-  current_user = get_jwt_identity()
   query = models.SpellHistoryModel.find_results_by_username(current_user)
-  resp = make_response(
-    render_template('history.html', 
+  if current_user == 'admin':
+    resp = make_response(
+      render_template('history.html', 
+        current_user=current_user,
+        admin_user=True,
+        numqueries=len(query),
+        query_output = query,
+        csrf_token=(get_raw_jwt() or {}).get("csrf")
+        )
+      )
+  else:
+    resp = make_response(
+      render_template('history.html', 
       current_user=current_user,
       numqueries=len(query),
-      output = query,
+      query_output = query,
       csrf_token=(get_raw_jwt() or {}).get("csrf")
       )
     )
+
   add_headers(resp)
   return resp, 200
 
+
+@app.route('/history/query<queryid>', methods=['POST', 'GET'])
+@jwt_required
+def history_queryid(queryid):
+  current_user = get_jwt_identity()
+  query = models.SpellHistoryModel.find_results_by_queryid(queryid)
+  try:
+    if current_user == query[1] or current_user == 'admin':
+      resp = make_response(
+          render_template('query.html', 
+          current_user=current_user,
+          query_output = query,
+          csrf_token=(get_raw_jwt() or {}).get("csrf")
+          )
+        )
+      add_headers(resp)
+      return resp, 200
+    else:
+      resp = make_response(
+          render_template('query.html', 
+          current_user=current_user,
+          error='You do not have access to this query.',
+          csrf_token=(get_raw_jwt() or {}).get("csrf")
+          )
+        )
+      add_headers(resp)
+      return resp, 401
+  except:
+    resp = make_response(
+        render_template('query.html', 
+        current_user=current_user,
+        error='Your Query does not exists.',
+        csrf_token=(get_raw_jwt() or {}).get("csrf")
+        )
+      )
+    add_headers(resp)
+    return 404
 
 @app.route('/token/refresh', methods=['POST', 'GET'])
 @jwt_refresh_token_required
