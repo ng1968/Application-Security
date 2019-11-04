@@ -119,3 +119,83 @@ def test_spell_check_page_double_submit(client):
   
   assert res1.status_code == 401
   assert b"CSRF double submit tokens do not match" in res1.data
+
+
+def test_logout(client):
+  sent = {"uname" : "test",
+          "pword" : "test",
+          "2fa" : "test"}
+  res = client.post("/login", data=sent)
+  res1 = client.get("/logout")
+  assert res1.status_code == 200
+  assert b"success" in res1.data
+
+
+def test_404(client):
+  res = client.post("/rqegdfsgaffsbavsf")
+
+  assert res.status_code == 404
+  assert b"Why are you here??" in res.data
+
+
+def test_history_admin_access(client):
+  sent = {"uname" : "admin",
+          "pword" : "administrator",
+          "2fa" : "12345678901"}
+  res = client.post("/login", data=sent)
+
+  res = client.get("/history")
+  
+  assert res.status_code == 200
+  assert b"userquery" in res.data
+
+
+def test_history_query_1(client):
+  sent = {"uname" : "admin",
+          "pword" : "administrator",
+          "2fa" : "12345678901"}
+  res = client.post("/login", data=sent)
+
+  res1 = client.get("/history/query1")
+  
+  assert res.status_code == 200
+  assert b"""<td id="queryid">1</td>
+    <td id="username">test</td>
+    <td id="querytext">test</td>
+    <td id="queryresults"></td>""" in res1.data
+
+
+def test_history_query_invalid_user(client):
+  sent = {"uname" : "test",
+          "pword" : "test",
+          "2fa" : "test"}
+  res = client.post("/login", data=sent)
+
+  res1 = client.get("/history/query4")
+  
+  assert res1.status_code == 401
+  assert b"You do not have access to this query." in res1.data
+
+
+def test_login_history_access(client):
+  sent = {"uname" : "admin",
+          "pword" : "administrator",
+          "2fa" : "12345678901"}
+  res = client.post("/login", data=sent)
+
+  res1 = client.get("/login_history")
+
+  assert res1.status_code == 200
+  assert b"admin" in res1.data
+
+
+def test_login_history_invalid_access(client):
+  sent = {"uname" : "test",
+          "pword" : "test",
+          "2fa" : "test"}
+  res = client.post("/login", data=sent)
+
+  res1 = client.get("/login_history")
+
+  assert res1.status_code == 401
+  assert b"Sorry you do not have access" in res1.data

@@ -243,8 +243,8 @@ def history():
 @jwt_required
 def history_queryid(queryid):
   current_user = get_jwt_identity()
-  query = models.SpellHistoryModel.find_results_by_queryid(queryid)
   try:
+    query = models.SpellHistoryModel.find_results_by_queryid(int(queryid))
     if current_user == query[1] or current_user == 'admin':
       resp = make_response(
           render_template('query.html', 
@@ -290,7 +290,7 @@ def token_refresh():
   return resp, 200
 
 
-@app.route('/logout', methods=['POST', 'GET'])
+@app.route('/logout', methods=['GET'])
 @jwt_required
 def logout():
   current_user = get_jwt_identity()
