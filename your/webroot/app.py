@@ -6,6 +6,7 @@ from flask_jwt_extended import (
     get_jwt_identity, set_access_cookies,
     set_refresh_cookies, unset_jwt_cookies, get_raw_jwt
 )
+from secrets import token_hex
 import subprocess
 import time
 
@@ -87,8 +88,8 @@ def login():
         request.remote_addr)
       return resp, 401
     
-    if models.UserModel.verify_hash(request.form['pword'], current_user.password):
-      if models.UserModel.verify_hash(request.form['2fa'], current_user.two_factor):
+    if models.UserModel.verify_hash(request.form['pword'], current_user.password, current_user.pepper):
+      if models.UserModel.verify_hash(request.form['2fa'], current_user.two_factor, current_user.pepper):
         access_token = create_access_token(identity = request.form['uname'])
         refresh_token = create_refresh_token(identity = request.form['uname'])
         resp = make_response(render_template('login.html', current_user=current_user.username, login_output='success'))
@@ -131,10 +132,12 @@ def register():
       add_headers(resp)
       return resp, 401
     
+    salt = token_hex(nbytes=16)
     new_user = models.UserModel(
       username = request.form['uname'],
-      password = models.UserModel.generate_hash(request.form['pword']),
-      two_factor = models.UserModel.generate_hash(request.form['2fa'])
+      password = models.UserModel.generate_hash(request.form['pword'], salt),
+      two_factor = models.UserModel.generate_hash(request.form['2fa'], salt),
+      pepper = salt
     )
     
     try:

@@ -1,6 +1,7 @@
 from app import db
 from passlib.hash import pbkdf2_sha256 as sha256
 
+
 class UserModel(db.Model):
   __tablename__ = 'users'
 
@@ -8,6 +9,7 @@ class UserModel(db.Model):
   username = db.Column(db.String(120), unique = True, nullable = False)
   password = db.Column(db.String(120), nullable = False)
   two_factor = db.Column(db.String(120), nullable = False)
+  pepper = db.Column(db.String(16), nullable=False)
   
   def save_to_db(self):
     db.session.add(self)
@@ -32,12 +34,12 @@ class UserModel(db.Model):
     return cls.query.filter_by(username = username).with_entities(UserModel.id).first()
 
   @staticmethod
-  def generate_hash(password):
-    return sha256.hash(password)
+  def generate_hash(password, pepper):
+    return sha256.hash(password+pepper)
   
   @staticmethod
-  def verify_hash(password, hash):
-    return sha256.verify(password, hash)
+  def verify_hash(password, hash, pepper):
+    return sha256.verify(password+pepper, hash)
 
 class SpellHistoryModel(db.Model):
   __tablename__ = 'spellcheckhistory'
