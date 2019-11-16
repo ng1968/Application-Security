@@ -41,8 +41,14 @@ def add_headers(resp):
 
 
 def add_login_to_db(username_input, message_input, ip_input):
+  current_user = models.UserModel.find_by_username(request.form['uname'])
+  
+  if not current_user:
+    current_id = -1
+  else:
+    current_id = models.UserModel.id_from_username(username_input)[0]
   login = models.LoggingModel(
-    user_id=models.UserModel.id_from_username(username_input)[0],
+    user_id=current_id,
     username = username_input,
     log_type = 'login',
     message = message_input,
@@ -51,10 +57,10 @@ def add_login_to_db(username_input, message_input, ip_input):
   )
 
   try:    
-    login.save_to_db()
+    login.save_to_db() 
     if message_input == 'success':
       logout = models.LoggingModel(
-        user_id=models.UserModel.id_from_username(username_input)[0],
+        user_id=current_id,
         username = username_input,
         log_type = 'logout',
         message = 'Not Logged Out Yet.',
