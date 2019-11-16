@@ -5,6 +5,8 @@ matrix:
       sudo apt-get install -y build-essential check
     script:
       make test
+      make
+      cp spell_check your/webroot/
     language: python
     python:
       - "2.7"
