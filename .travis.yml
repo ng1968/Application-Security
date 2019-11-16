@@ -16,7 +16,6 @@ matrix:
       - sudo pip install flask
       - sudo pip install tox
       - sudo pip install tox-travis
-      - sudo pip install python-secrets
     before_script:
       cd your/webroot/
     script:
