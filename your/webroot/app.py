@@ -6,6 +6,7 @@ from flask_jwt_extended import (
     get_jwt_identity, set_access_cookies,
     set_refresh_cookies, unset_jwt_cookies, get_raw_jwt
 )
+import os
 from secrets import token_hex
 import subprocess
 import time
@@ -15,7 +16,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'some-secret-string'
+app.config['SECRET_KEY'] = open("/run/secrets/secret_key", "r").read().strip()
 
 db = SQLAlchemy(app)
 @app.before_first_request
@@ -28,7 +29,7 @@ app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
 app.config['JWT_COOKIE_CSRF_PROTECT'] = True
 app.config['JWT_CSRF_CHECK_FORM'] = True
 app.config['JWT_COOKIE_SAMESITE'] = 'Lax'
-app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+app.config['JWT_SECRET_KEY'] = open("/run/secrets/jwt_secret_key", "r").read().strip()
 jwt = JWTManager(app)
 
 import models
